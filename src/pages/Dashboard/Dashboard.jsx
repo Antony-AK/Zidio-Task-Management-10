@@ -12,15 +12,15 @@ const Dashboard = ({ summary, projects }) => {
 
   return (
     <div>
-      <div className="dashboard w-full h-full flex flex-col p-5 pl-8">
+      <div className="dashboard w-full h-full flex flex-col p-5 lg:pl-8">
         <div className="title mb-1">
           <h1 className='text-2xl font-semibold'>Dashboard</h1>
           <p className='text-sm font-light'>Centralized overview of key insights.</p>
         </div>
 
-        <div className="projects-details-dashboard w-full flex h-48 mt-10 p-2 gap-5">
+        <div className="projects-details-dashboard lg:w-full md:w-[600px]  md:flex md:flex-wrap lg:flex lg:flex-nowrap justify-center items-center lg:h-48 mx-auto md:h-[410px] sm:h-[740px] mt-10 lg:p-2 gap-5 space-y-5 md:space-y-0 lg:space-y-0">
           {summary.title.map((title, index) => (
-            <div key={index} className="showcase-data w-72 h-40 bg-white flex flex-col rounded-2xl px-6 py-4 transform ease-linear duration-300 hover:bg-orange shadow-md">
+            <div key={index} className="showcase-data lg:w-72 h-40 bg-white flex flex-col rounded-2xl mx-auto px-6 py-4 transform ease-linear duration-300 hover:bg-orange shadow-md ">
               <div className="topdiv-data flex justify-between">
                 <div className="data-title">
                   <p className='font-semibold'>{title}</p>
@@ -42,16 +42,16 @@ const Dashboard = ({ summary, projects }) => {
           ))}
         </div>
 
-        <div className="dash-projects-data flex justify-between w-full h-[260px] mt-5 px-3">
-          <div className="dash-projects-list w-[650px] h-full bg-white rounded-2xl border p-5 overflow-y-scroll scrollbar-hide">
-            <p className='text-lg font-medium'>Projects</p>
+        <div className="dash-projects-data lg:flex justify-between w-full h-[260px] mt-5 px-3 ">
+          <div className="dash-projects-list lg:w-[650px] w-full h-full bg-white rounded-2xl border md:p-6 p-4 overflow-y-scroll scrollbar-hide">
+            <p className='text-lg font-medium '>Projects</p>
             {projects.map((project, index) => (
-              <div key={index} className="project-data-status flex justify-between mx-16 mt-3">
-                <div className="project-data">
-                  <p className='text-lg'>{project.name}</p>
-                  <p className='font-light'>Due date {project.deadline}</p>
+              <div key={index} className="project-data-status flex justify-between lg:mx-16 mt-3 mx-auto">
+                <div className="project-data ">
+                  <p className='lg:text-lg '>{project.name}</p>
+                  <p className='font-light text-sm  '>Due date {project.deadline}</p>
                 </div>
-                <div className={`status w-24 h-6 mt-3 rounded-xl text-sm text-center
+                <div className={`status md:w-24 w-16 h-6 mt-3 rounded-xl md:text-sm text-xs text-center flex justify-center items-center
                   ${project.status === "Pending" ? "bg-lightred text-red-600" : ""}
                   ${project.status === "Completed" ? "bg-lightgreen text-green-600" : ""}
                   ${project.status === "In Progress" ? "bg-lightOrange text-yellow-800" : ""}`}>
@@ -61,7 +61,7 @@ const Dashboard = ({ summary, projects }) => {
             ))}
           </div>
 
-          <div className="graph-data">
+          <div className="graph-data mx-auto">
             <TriangleChart data={status_data} />
           </div>
         </div>

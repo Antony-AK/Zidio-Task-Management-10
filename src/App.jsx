@@ -5,6 +5,10 @@ import { Route, Routes } from 'react-router-dom'
 import Projects from './pages/Projects/Projects'
 import { images } from './assets/data'
 import Dashboard from './pages/Dashboard/Dashboard'
+import Calender from './pages/Calender/Calender'
+import Members from './pages/Members/Members'
+import Login from './pages/Login/Login'
+import { use, useState } from 'react'
 
 function App() {
 
@@ -93,24 +97,32 @@ function App() {
     }
   };
 
+  const [isSidebarOpen, setSidebarOpen] = useState(false);
+
+  const togglesidebar = () => {
+    setSidebarOpen(!isSidebarOpen);
+  };
 
 
 
   return (
     <>
       <div className="zidio-app w-full h-screen pt-3 pr-3">
-        <Navbar />
-        <Sidebar projects={data.projects} />
-        <div className="homediv w-[calc(100%-18.22%)] bg-lightase h-[618px]  flex flex-col rounded-l-2xl rounded-r-2xl ml-[18.22%] mt-2">
+        <Navbar toggleSidebar={togglesidebar} />
+        <Sidebar projects={data.projects} isOpen={isSidebarOpen} toggleSidebar={togglesidebar} />
+        <div className="homediv lg:w-[calc(100%-18.22%)] w-[99%] ml-3 bg-lightase lg:h-[618px] md:h-[1150px] h-[1900px] border flex flex-col rounded-l-2xl rounded-r-2xl lg:ml-[18.22%] mt-2">
           <Routes>
             <Route path='/projects/:id' element={<Projects projects={data.projects} />} />
             <Route path='/dashboard' element={<Dashboard summary={data.summary} projects={data.projects} />} />
+            <Route path='/calender' element={<Calender />} />
+            <Route path='/members' element={<Members/>} />
           </Routes>
         </div>
-
-
-
       </div>
+      
+      
+      
+      
 
     </>
   )

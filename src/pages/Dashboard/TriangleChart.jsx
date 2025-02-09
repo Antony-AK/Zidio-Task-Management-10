@@ -3,7 +3,7 @@ import { PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer } from "recha
 
 const TriangleChart = ({ data }) => {
     return (
-        <div className="w-[470px] h-full p-5 bg-white rounded-lg shadow-md">
+        <div className="md:w-[470px] mt-10 lg:mt-0 h-full mx-auto p-5 bg-white rounded-lg shadow-md">
             <h3 className="text-lg font-semibold text-center mb-3">Projects Progress</h3>
             <div className="flex items-center justify-between">
                 {/* Left legend */}
@@ -21,7 +21,7 @@ const TriangleChart = ({ data }) => {
                     <PieChart>
                         <Pie
                             data={data}
-                            cx="50%"
+                            cx="50% "
                             cy="50%"
                             innerRadius={40}
                             outerRadius={65}

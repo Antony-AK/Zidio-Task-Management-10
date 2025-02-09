@@ -23,16 +23,16 @@ const Task = ({ tasks }) => {
 
     return (
         <div>
-            <div className="task-component w-full h-[335px] flex bg-white p-3 gap-5">
+            <div className="task-component w-full lg:h-[335px]  flex flex-col md:flex-row md:flex-wrap lg:flex-row lg:flex-nowrap bg-white p-3 gap-5 space-y-10 lg:space-y-0 ">
 
 
-                <div className="tasks w-80 h-[310px] flex flex-col gap-5 overflow-y-scroll scrollbar-hide ">
-                    <div className="task-category w-[278px] h-8 bg-darkase flex justify-center items-center gap-3 rounded-lg fixed overflow-hidden ">
+                <div className="tasks md:w-80 w-72 h-[310px] flex flex-col gap-5 overflow-y-scroll scrollbar-hide ">
+
+                    <div className=''>
+                    <div className="task-category w-full h-8 bg-darkase flex justify-center items-center gap-3 rounded-lg  md:mt-10 lg:mt-0 ">
                         <p className='w-2 h-2 rounded-full bg-orange text-orange'></p>
                         <p>TODO</p>
                     </div>
-
-                    <div className='mt-8'>
                         {todotask.map((task, index) => (
                             <div key={index} className="task w-full h-44 flex flex-col bg-white border rounder-lg p-4 gap-2 rounded-lg cursor-pointer mt-2" onClick={() => openForum(task)}>
                                 <div className="topdiv w-full h-5 flex flex-row justify-between items-center">
@@ -78,13 +78,13 @@ const Task = ({ tasks }) => {
                     </div>
                 </div>
 
-                <div className="tasks w-80 h-[310px] flex flex-col gap-5 overflow-y-scroll scrollbar-hide ">
-                    <div className="task-category w-[278px] h-8 bg-darkase flex justify-center items-center gap-3 rounded-lg fixed overflow-hidden " >
+                <div className="tasks md:w-80 w-72 h-[310px] flex flex-col gap-5 overflow-y-scroll scrollbar-hide ">
+                 
+                    <div className=''>
+                    <div className="task-category w-full h-8 bg-darkase flex justify-center items-center gap-3 rounded-lg  " >
                         <p className='w-2 h-2 rounded-full bg-orange text-orange'></p>
                         <p>In Progress</p>
                     </div>
-
-                    <div className='mt-8'>
                         {inprogresstask.map((task, index) => (
                             <div key={index} className="task w-full h-44 flex flex-col bg-white border rounder-lg p-4 gap-2 rounded-lg cursor-pointer mt-2" onClick={() => openForum(task)}>
                                 <div className="topdiv w-full h-5 flex flex-row justify-between items-center">
@@ -129,13 +129,14 @@ const Task = ({ tasks }) => {
                     </div>
                 </div>
 
-                <div className="tasks w-80 h-[310px] flex flex-col gap-5 overflow-y-scroll scrollbar-hide ">
-                    <div className="task-category w-[278px] h-8 bg-darkase flex justify-center items-center gap-3 rounded-lg fixed overflow-hidden " >
+                <div className="tasks md:w-80 w-72 h-[310px] flex flex-col gap-5 overflow-y-scroll scrollbar-hide ">
+                   
+
+                    <div className=''>
+                    <div className="task-category w-full h-8 bg-darkase flex justify-center items-center gap-3 rounded-lg " >
                         <p className='w-2 h-2 rounded-full bg-orange text-orange'></p>
                         <p>Need Review</p>
                     </div>
-
-                    <div className='mt-8'>
                         {reviewtask.map((task, index) => (
                             <div key={index} className="task w-full h-44 flex flex-col bg-white border rounder-lg p-4 gap-2 rounded-lg cursor-pointer mt-2" onClick={() => openForum(task)}>
                                 <div className="topdiv w-full h-5 flex flex-row justify-between items-center">
@@ -180,13 +181,14 @@ const Task = ({ tasks }) => {
                     </div>
                 </div>
 
-                <div className="tasks w-80 h-[310px] flex flex-col gap-5 overflow-y-scroll scrollbar-hide ">
-                    <div className="task-category w-[278px] h-8 bg-darkase flex justify-center items-center gap-3 rounded-lg fixed overflow-hidden " >
+                <div className="tasks md:w-80 w-72 h-[310px] flex flex-col gap-5 overflow-y-scroll scrollbar-hide ">
+                   
+
+                    <div>
+                    <div className="task-category w-full h-8 bg-darkase flex justify-center items-center gap-3 rounded-lg  " >
                         <p className='w-2 h-2 rounded-full bg-orange text-orange'></p>
                         <p>Done</p>
                     </div>
-
-                    <div className='mt-8'>
                         {Donetask.map((task, index) => (
                             <div key={index} className="task w-full h-44 flex flex-col bg-white border rounder-lg p-4 gap-2 rounded-lg cursor-pointer mt-2" onClick={() => openForum(task)}>
                                 <div className="topdiv w-full h-5 flex flex-row justify-between items-center">

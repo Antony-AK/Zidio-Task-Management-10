@@ -37,7 +37,7 @@ const Projects = ({ projects }) => {
           <h1 className='text-2xl font-semibold '>{project.name}</h1>
         </div>
 
-        <div className="project-details flex gap-5 mt-5 w-3/4 overflow-hidden">
+        <div className="project-details flex gap-5 mt-5 lg:w-3/4 w-full overflow-hidden">
 
           <div className="details-icons flex flex-col space-y-5 text-[#A7A7A7]">
             <p className='font-textcolorase'><i class="ri-eye-line"></i></p>
@@ -49,7 +49,7 @@ const Projects = ({ projects }) => {
 
           <div className="details-left flex flex-col space-y-5 text-[#A7A7A7]">
             <p>visibility</p>
-            <p>Assigned to</p>
+            <p className='w-[85px]'>Assigned to</p>
             <p>Deadline</p>
             <p>Tags</p>
           </div>
@@ -60,9 +60,9 @@ const Projects = ({ projects }) => {
               <p>Private Board</p>
             </div>
 
-            <div className="members-list flex gap-3">
+            <div className="members-list md:w-full w-20  flex gap-3 overflow-x-scroll scrollbar-hide">
               {project.members.map((member, index) => (
-                <div key={index} className="members w-28 h-7 gap-2 bg-white flex text-center items-center  rounded-2xl pl-2">
+                <div key={index} className="members md:w-28 h-7 gap-2 bg-white flex text-center items-center  rounded-2xl pl-2 pe-2">
                   <div className="member-profile w-6 h-6 rounded-full  ">
                     <img src={member.profile} alt="" className='rounded-full' />
                   </div>
@@ -89,7 +89,7 @@ const Projects = ({ projects }) => {
 
         </div>
 
-        <div className="tasks-head-button flex justify-end gap-5 mt-[-3%]">
+        <div className="tasks-head-button flex justify-end gap-5 lg:mt-[-33px] mt-7">
           <div className="task-filter">
             <button className='filter'><p><i class="ri-filter-2-line"></i></p>filter</button>
           </div>
@@ -101,7 +101,7 @@ const Projects = ({ projects }) => {
 
         {ismodelopen && (
           <div className='model-overlay fixed inset-0 bg-gray-300 bg-opacity-50 flex justify-center items-center z-50'>
-            <div className='model bg-white w-96 p-6 rounded-lg shadow-lg'>
+            <div className='model bg-white md:w-96 w-80 p-6 rounded-lg shadow-lg'>
               <h2 className='text-xl font-semibold mb-4'>Add New Task</h2>
               <AddTask addNewTask={addNewTask} closeModel={toggleModel} />
             </div>
