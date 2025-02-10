@@ -1,7 +1,7 @@
 import './App.css'
 import Navbar from './Components/Navbar/Navbar'
 import Sidebar from './Components/SideBar/Sidebar'
-import { Route, Routes } from 'react-router-dom'
+import { Route, Routes, useLocation } from 'react-router-dom'
 import Projects from './pages/Projects/Projects'
 import { images } from './assets/data'
 import Dashboard from './pages/Dashboard/Dashboard'
@@ -103,11 +103,15 @@ function App() {
     setSidebarOpen(!isSidebarOpen);
   };
 
+  const location = useLocation();
+  const isAuthpage = location.pathname === "/login";
+
 
 
   return (
     <>
-      <div className="zidio-app w-full h-screen pt-3 pr-3">
+    {isAuthpage ? (<Login/>) : 
+      (<div className="zidio-app w-full h-screen pt-3 pr-3">
         <Navbar toggleSidebar={togglesidebar} />
         <Sidebar projects={data.projects} isOpen={isSidebarOpen} toggleSidebar={togglesidebar} />
         <div className="homediv lg:w-[calc(100%-18.22%)] w-[99%] ml-3 bg-lightase lg:h-[618px] md:h-[1150px] h-[1900px] border flex flex-col rounded-l-2xl rounded-r-2xl lg:ml-[18.22%] mt-2">
@@ -116,9 +120,12 @@ function App() {
             <Route path='/dashboard' element={<Dashboard summary={data.summary} projects={data.projects} />} />
             <Route path='/calender' element={<Calender />} />
             <Route path='/members' element={<Members/>} />
+            <Route path='/login' element={<Login/>} />
+
           </Routes>
         </div>
       </div>
+)}
       
       
       
