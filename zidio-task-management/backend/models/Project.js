@@ -23,8 +23,8 @@ const ProjectSchema = new mongoose.Schema({
     name: { type: String, required: true },
     deadline: { type: Date, required: true },
     status: { type: String, enum: ["Pending", "In Progress", "Done"], default: "Pending" }, // Fixed status
-    members: [MemberSchema], // Storing members as embedded objects
-    tasks: [TaskSchema], // Storing tasks as embedded objects
+    members: [MemberSchema], 
+    tasks: [TaskSchema], 
 }, { timestamps: true });
 
 module.exports = mongoose.model("Project", ProjectSchema);
