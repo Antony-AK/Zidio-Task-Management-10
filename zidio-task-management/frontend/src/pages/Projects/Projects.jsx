@@ -16,6 +16,8 @@ const Projects = ({ projects }) => {
   const [ismodelopen, setModelOpen] = useState(false);
   const [tasks, setTasks] = useState(project.tasks || []);
   const [taskToEdit, setTaskToEdit] = useState(null);
+  const [filterPriority, setFilterPriority] = useState(null);
+  const [showFilterDropdown, setShowFilterDropdown] = useState(false);
 
 
 
@@ -36,6 +38,17 @@ const Projects = ({ projects }) => {
   };
 
   const formattedDeadline = format(new Date(project?.deadline), 'yyyy-MM-dd');
+
+  const toggleFilterDropdown = () => {
+    setShowFilterDropdown((prev) => !prev);
+  };
+
+  const applyfilter = (priority) => {
+    setFilterPriority(priority);
+    setShowFilterDropdown(false);
+  };
+
+  const filteredTasks = filterPriority ? tasks.filter((task) => task.priority === filterPriority) : project.tasks;
 
 
 
@@ -104,7 +117,7 @@ const Projects = ({ projects }) => {
 
         <div className="tasks-head-button flex justify-end gap-5 lg:mt-[-33px] mt-7">
           <div className="task-filter">
-            <button className='filter'><p><i class="ri-filter-2-line"></i></p>filter</button>
+            <button className='filter' onClick={toggleFilterDropdown}><p><i class="ri-filter-2-line"></i></p>filter</button>
           </div>
 
           <div className="task-add">
@@ -121,11 +134,30 @@ const Projects = ({ projects }) => {
           </div>
         )}
 
+        {showFilterDropdown && (
+          <div className="absolute right-20 top-80 bg-white shadow-md p-3 rounded-md w-32">
+            <button className="block w-full text-left p-2 hover:bg-orange" onClick={() => applyfilter('High')}>
+              High
+            </button>
+            <button className="block w-full text-left p-2 hover:bg-orange" onClick={() => applyfilter('Medium')}>
+              Medium
+            </button>
+            <button className="block w-full text-left p-2 hover:bg-orange" onClick={() => applyfilter('Low')}>
+              Low
+            </button>
+            <button className="block w-full text-left p-2 hover:bg-gray-200" onClick={() => applyfilter(null)}>
+              Clear Filter
+            </button>
+          </div>
+        )}
+
+
+
         <hr className='my-5'></hr>
 
 
         <div className="tasks">
-          <Task tasks={project.tasks} openModel={toggleModel} edittask={setTaskToEdit} projectId={project?._id} />
+          <Task tasks={filteredTasks} openModel={toggleModel} edittask={setTaskToEdit} projectId={project?._id} />
         </div>
 
       </div>

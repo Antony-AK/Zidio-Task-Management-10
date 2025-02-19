@@ -2,6 +2,8 @@ import axios from 'axios';
 
 const BASE_URL = "http://localhost:5001/api/projects";
 const EVENTS_API_URL = "http://localhost:5001/api/events";
+const API_URL = "http://localhost:5001/api/auth";
+
 
 
 export const fetchProjects = async () => {
@@ -17,7 +19,7 @@ export const fetchProjects = async () => {
 export const addTaskToProject = async (projectId, taskData) => {
     try {
         const response = await axios.post(`${BASE_URL}/${projectId}/tasks`, taskData);
-        return response.data; 
+        return response.data;
     } catch (error) {
         console.error("Error adding task:", error);
         throw error;
@@ -28,7 +30,7 @@ export const addTaskToProject = async (projectId, taskData) => {
 export const updateTaskInProject = async (projectId, taskId, taskData) => {
     try {
         const response = await axios.put(`${BASE_URL}/${projectId}/tasks/${taskId}`, taskData);
-        return response.data; 
+        return response.data;
     } catch (error) {
         console.error("Error updating task:", error);
         throw error;
@@ -60,7 +62,7 @@ export const fetchSummary = async () => {
 export const fetchEvents = async () => {
     try {
         const response = await axios.get(EVENTS_API_URL);
-        return response.data; 
+        return response.data;
     } catch (error) {
         console.error("Error fetching events:", error);
         throw error;
@@ -79,20 +81,40 @@ export const addEvent = async (eventData) => {
 
 export const updateEvent = async (eventId, updatedEventData) => {
     try {
-      const response = await axios.put(`${EVENTS_API_URL}/${eventId}`, updatedEventData);
-      return response.data;
+        const response = await axios.put(`${EVENTS_API_URL}/${eventId}`, updatedEventData);
+        return response.data;
     } catch (error) {
-      console.error("Error updating event:", error);
-      throw error;
+        console.error("Error updating event:", error);
+        throw error;
     }
-  };
-  
-  export const deleteEvent = async (eventId) => {
+};
+
+export const deleteEvent = async (eventId) => {
     try {
-      const response = await axios.delete(`${EVENTS_API_URL}/${eventId}`);
-      return response.data;
+        const response = await axios.delete(`${EVENTS_API_URL}/${eventId}`);
+        return response.data;
     } catch (error) {
-      console.error("Error deleting event:", error);
-      throw error;
+        console.error("Error deleting event:", error);
+        throw error;
     }
-  };
+};
+
+
+//auth fun
+export const signupUser = async (userData) => {
+    try {
+        const response = await axios.post(`${API_URL}/signup`, userData);
+        return response.data;
+    } catch (error) {
+        throw error.response?.data?.message || "Signup failed";
+    }
+};
+
+export const loginUser = async (userData) => {
+    try {
+        const response = await axios.post(`${API_URL}/login`, userData);
+        return response.data;
+    } catch (error) {
+        throw error.response?.data?.message || "Login failed";
+    }
+};
