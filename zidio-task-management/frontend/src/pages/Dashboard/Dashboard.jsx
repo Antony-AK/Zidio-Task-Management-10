@@ -1,17 +1,22 @@
 import React from 'react'
 import TriangleChart from './TriangleChart'
+import { format } from 'date-fns';
 
 const Dashboard = ({ summary, projects }) => {
   console.log("Summary Data:", summary);
   console.log("Type of Summary:", typeof summary);
-console.log("Is Array:", Array.isArray(summary));
+  console.log("Is Array:", Array.isArray(summary));
 
 
   const status_data = [
-    { name: "Pending", value: 40, fill: "#FF0000" },
-    { name: "In Progress", value: 30, fill: "#ffa500" },
-    { name: "Completed", value: 20, fill: "#32cd32" }
+    { name: "Pending", value: 10, fill: "#FF0000" },
+    { name: "In Progress", value: 90, fill: "#ffa500" },
+    { name: "Completed", value: 0, fill: "#32cd32" }
   ];
+
+  const formattedDeadline = format(new Date(projects[0]?.deadline), 'yyyy-MM-dd');
+
+
 
 
   return (
@@ -53,7 +58,7 @@ console.log("Is Array:", Array.isArray(summary));
               <div key={index} className="project-data-status flex justify-between lg:mx-16 mt-3 mx-auto">
                 <div className="project-data ">
                   <p className='lg:text-lg '>{project.name}</p>
-                  <p className='font-light text-sm  '>Due date {project.deadline}</p>
+                  <p className='font-light text-sm  '>Due date {formattedDeadline}</p>
                 </div>
                 <div className={`status md:w-24 w-16 h-6 mt-3 rounded-xl md:text-sm text-xs text-center flex justify-center items-center
                   ${project.status === "Pending" ? "bg-lightred text-red-600" : ""}

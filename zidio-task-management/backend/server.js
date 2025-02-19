@@ -12,8 +12,10 @@ app.use('/uploads', express.static('public/images'));
 
 // Import routes
 const projectRoutes = require("./routes/projectRoutes");
+const eventRoutes = require("./routes/eventRoutes");
 
 app.use("/api/projects", projectRoutes);
+app.use("/api/events", eventRoutes);
 
 app.get("/", (req, res) => {
     res.send("✅ Backend is running!");

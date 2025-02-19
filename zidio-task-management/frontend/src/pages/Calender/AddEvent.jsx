@@ -1,32 +1,39 @@
 import React, { useEffect, useState } from 'react'
 
-const AddEvent = ({addnewevent}) => {
-    const [title, setTitle] = useState('');
-    const [description, setDescription] = useState('');
-    const [date, setDate] = useState('');
-    const [stime, setStime] = useState('');
-    const [etime, setEtime] = useState('');
+const AddEvent = ({addnewevent, existingEvent}) => {
+    const [title, setTitle] = useState(existingEvent?.title || '');
+    const [description, setDescription] = useState(existingEvent?.description || '');
+    const [date, setDate] = useState(existingEvent?.date || '');
+    const [stime, setStime] = useState(existingEvent?.startTime || '');
+    const [etime, setEtime] = useState(existingEvent?.endTime || '');
 
 
-    const handlesubmit = (e) => {
+    const handlesubmit = async (e) => {
         e.preventDefault();
 
 
-        if(!title || !description|| !date){
+        if (!title || !description || !date || !stime || !etime) {
             alert("Please fill in all required fields.");
-            return;
-        }
+            return;}
 
 
-        const newevent = {
+
+        const eventDetails = {
+            _id: existingEvent?._id,
             title,
             description,
             date,
-            starttime: stime,
-            endtime: etime,
+            startTime: stime,
+            endTime: etime,
             color: "bg-blue-300",
         };
-        addnewevent(newevent);
+
+        try{
+            await addnewevent(eventDetails);
+        } catch (error){
+            alert("failed to update event")
+        }
+        
     
 };
     
@@ -35,7 +42,7 @@ const AddEvent = ({addnewevent}) => {
             <form onSubmit={handlesubmit} >
                 <div className="flex justify-between">
                     <div>
-                        <h2 className="text-xl font-semibold mb-4">Add Event</h2>
+                        <h2 className="text-xl font-semibold mb-4">{existingEvent ? "Edit Event" : "Add Event"}</h2>
                     </div>
                     <div>
                         <button type='submit' className='w-20 h-8 bg-orange text-white border-orange flex text-center justify-center items-center rounded-md gap-2 border '>save</button>

@@ -115,7 +115,7 @@ const Projects = ({ projects }) => {
         {ismodelopen && (
           <div className='model-overlay fixed inset-0 bg-gray-300 bg-opacity-50 flex justify-center items-center z-50'>
             <div className='model bg-white md:w-96 w-80 p-6 rounded-lg shadow-lg'>
-              <h2 className='text-xl font-semibold mb-4'>Add New Task</h2>
+              <h2 className='text-xl font-semibold mb-4'>{taskToEdit ? "Edit Task" : "Add New Task"}</h2>
               <AddTask addNewTask={addNewTask} closeModel={toggleModel} projectId={project?._id} updateTask={updateTask} existingTask={taskToEdit} />
             </div>
           </div>

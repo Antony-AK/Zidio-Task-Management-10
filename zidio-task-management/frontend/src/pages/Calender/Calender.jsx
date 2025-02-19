@@ -2,44 +2,11 @@ import React, { useState } from "react";
 import { format, startOfMonth, endOfMonth, startOfWeek, endOfWeek, addDays, subMonths, addMonths } from "date-fns";
 import { FaChevronLeft, FaChevronRight, FaPlus, FaTimes } from "react-icons/fa";
 import AddEvent from "./AddEvent";
-
-const events = [
-  {
-    date: "2025-02-13",
-    title: "Client Call",
-    description: "Discuss project updates and next steps with the client.",
-    startTime: "10:00 AM",
-    endTime: "11:00 AM",
-    color: "bg-green-300"
-  },
-  {
-    date: "2025-02-20",
-    title: "Client Call",
-    description: "Weekly client sync-up meeting.",
-    startTime: "2:00 PM",
-    endTime: "3:00 PM",
-    color: "bg-green-300"
-  },
-  {
-    date: "2025-02-28",
-    title: "Deadline",
-    description: "Final submission deadline for project completion.",
-    startTime: "11:59 PM",
-    endTime: "12:00 AM",
-    color: "bg-red-400"
-  },
-  {
-    date: "2025-02-08",
-    title: "Client Call",
-    description: "Initial discussion with a potential new client.",
-    startTime: "4:00 PM",
-    endTime: "5:00 PM",
-    color: "bg-green-300"
-  }
-];
+import { addEvent, updateEvent, deleteEvent } from "../../utils/api";
 
 
-const Calendar = () => {
+
+const Calendar = ({events, setEvents}) => {
 
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const monthStart = startOfMonth(currentMonth);
@@ -48,6 +15,7 @@ const Calendar = () => {
   const endDate = endOfWeek(monthEnd);
   const [ismodelopen, setModelOpen] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState(null);
+  const [isEditing, setIsEditing] = useState(false);
 
 
   const handlePrevMonth = () => setCurrentMonth(subMonths(currentMonth, 1));
@@ -64,11 +32,52 @@ const Calendar = () => {
 
   const togglemodel = () => {
     setModelOpen(!ismodelopen)
+    setSelectedEvent(null);
+    setIsEditing(false);
   };
 
-  const addnewevent = (newevent) => {
-    events.push(newevent);
-    setModelOpen(false);
+  const addNewEvent = async (newEvent) => {
+    try{
+      const savedEvent = await addEvent(newEvent);
+      setEvents([...events, savedEvent]);
+      setModelOpen(false);
+      alert("Event added successfully");
+    } catch (error){
+      console.error("Error adding event:", error);
+      alert("Failed to add event. Please try again.")
+
+    }
+  };
+
+  const handleEditEvent = () => {
+    setIsEditing(true);
+    setModelOpen(true);
+  };
+
+  const updateExistingEvent = async (updatedEvent) => {
+    try {
+      const newEvent = await updateEvent(updatedEvent._id, updatedEvent);
+      setEvents(events.map(event => (event._id === newEvent._id ? newEvent : event)));
+      setModelOpen(false);
+      alert("Event updated successfully!");
+    } catch (error) {
+      console.error("Error updating event:", error);
+      alert("Failed to update event.");
+    }
+  };
+
+  const handleDeleteEvent = async (eventId) => {
+    if (!window.confirm("Are you sure you want to delete this event?")) return;
+
+    try {
+      await deleteEvent(eventId);
+      setEvents(events.filter(event => event._id !== eventId));
+      setSelectedEvent(null);
+      alert("Event deleted successfully!");
+    } catch (error) {
+      console.error("Error deleting event:", error);
+      alert("Failed to delete event.");
+    }
   };
 
 
@@ -124,7 +133,7 @@ const Calendar = () => {
       {ismodelopen && (
         <div className="model-overlay inset-0 fixed bg-gray-300 bg-opacity-50 flex justify-center items-center z-50" >
           <div className="model bg-white w-[370px] md:w-[550px] py-4 px-2 md:px-5 rounded-lg shadow-lg">
-            <AddEvent addnewevent={addnewevent} />
+            <AddEvent addnewevent={isEditing ? updateExistingEvent : addNewEvent} existingEvent={isEditing ? selectedEvent : null} />
           </div>
         </div>
       )}
@@ -143,8 +152,8 @@ const Calendar = () => {
           <p className="text-sm font-light mt-1">{selectedEvent.startTime} - {selectedEvent.endTime}</p>
           <hr className="bg-gray-300" />
           <div className="edit-delete-buttons flex gap-3 mt-1">
-            <button className="w-10 h-6 bg-lightgreen text-green-700 text-xs p-1">Edit</button>
-            <button className="w-12 h-6 bg-lightred text-red-700 text-xs p-1">Delete</button>
+            <button className="w-10 h-6 bg-lightgreen text-green-700 text-xs p-1" onClick={handleEditEvent} >Edit</button>
+            <button className="w-12 h-6 bg-lightred text-red-700 text-xs p-1" onClick={()=> handleDeleteEvent(selectedEvent._id)} >Delete</button>
           </div>
         </div>
       )}

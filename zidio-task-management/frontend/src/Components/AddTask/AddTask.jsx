@@ -23,11 +23,9 @@ const AddTask = ({ addNewTask, closeModel, projectId, existingTask, updateTask }
             setLoading(true);
 
             if (existingTask) {
-                // Edit Mode: Call update API
                 const updatedTask = await updateTaskInProject(projectId, existingTask._id, taskData);
-                updateTask(updatedTask);  // Update task in parent component
+                updateTask(updatedTask); 
             } else {
-                // Add Mode: Call add API
                 const newTask = await addTaskToProject(projectId, taskData);
                 addNewTask(newTask);
             }

@@ -9,7 +9,7 @@ import Calender from './pages/Calender/Calender'
 import Members from './pages/Members/Members'
 import Login from './pages/Login/Login'
 import { useEffect, useState, } from 'react'
-import { fetchProjects, fetchSummary } from './utils/api'
+import { fetchProjects, fetchSummary, fetchEvents } from './utils/api'
 
 
 
@@ -21,6 +21,7 @@ function App() {
   const [Loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [summary, setSummary] = useState([]);
+  const [events, setEvents] = useState([]);
 
 
   useEffect(() => {
@@ -40,14 +41,26 @@ function App() {
 
   useEffect(() => {
     const getData = async () => {
-        const summaryData = await fetchSummary();
-        const projectData = await fetchProjects();
-        setSummary(summaryData || []); 
-        setProjects(projectData || []); 
+      const summaryData = await fetchSummary();
+      const projectData = await fetchProjects();
+      setSummary(summaryData || []);
+      setProjects(projectData || []);
     };
 
     getData();
-}, []);
+  }, []);
+
+  useEffect(() => {
+    const getEvents = async () => {
+      try {
+        const data = await fetchEvents();
+        setEvents(data);
+      } catch (error) {
+        console.error("Failed to fetch events:", error);
+      }
+    };
+    getEvents();
+  }, []);
 
 
 
@@ -74,7 +87,7 @@ function App() {
             <Routes>
               <Route path='/projects/:_id' element={<Projects projects={projects} />} />
               <Route path='/dashboard' element={<Dashboard summary={summary} projects={projects} />} />
-              <Route path='/calender' element={<Calender />} />
+              <Route path='/calender' element={<Calender events={events} setEvents={setEvents} />} />
               <Route path='/members' element={<Members />} />
               <Route path='/login' element={<Login />} />
 

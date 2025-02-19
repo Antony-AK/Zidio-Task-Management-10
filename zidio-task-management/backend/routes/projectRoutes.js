@@ -169,10 +169,10 @@ router.get("/summary", async (req, res) => {
         const projects = await Project.find({}, "status"); 
 
         const summary = {
-            totalProjects: projects.length,
-            endedProjects: projects.filter(p => p.status === "Done").length,
-            pendingProjects: projects.filter(p => p.status === "Pending").length,
-            runningProjects: projects.filter(p => p.status === "In Progress").length,
+            TotalProjects: projects.length,
+            PendingProjects: projects.filter(p => p.status === "Pending").length,
+            RunningProjects: projects.filter(p => p.status === "In Progress").length,
+            EndedProjects: projects.filter(p => p.status === "Done").length,
         };
 
         res.status(200).json(summary);
