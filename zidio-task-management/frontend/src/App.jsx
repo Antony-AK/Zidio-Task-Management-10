@@ -1,4 +1,6 @@
 import "./App.css";
+import AOS from 'aos';
+import 'aos/dist/aos.css'; 
 import Navbar from "./Components/Navbar/Navbar";
 import Sidebar from "./Components/SideBar/Sidebar";
 import { Navigate, Route, Routes, useLocation } from "react-router-dom";
@@ -10,6 +12,7 @@ import Login from "./pages/Login/Login";
 import { useEffect, useState } from "react";
 import { fetchProjects, fetchSummary, fetchEvents } from "./utils/api";
 import { useAuth } from "./Context/AuthContext";
+import PrivateRoute from "./PrivateRoute/PrivateRoute";
 
 function App() {
   const { user } = useAuth();
@@ -44,7 +47,12 @@ function App() {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    AOS.init(); }, []);
+
   const toggleSidebar = () => setSidebarOpen((prev) => !prev);
+  console.log("Logged-in User:", user);
+
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>{error}</div>;
@@ -55,14 +63,14 @@ function App() {
         <Login />
       ) : user?.isAuthenticated ? (
         <div className="zidio-app w-full h-screen pt-3 pr-3">
-          <Navbar toggleSidebar={toggleSidebar} />
+          <Navbar toggleSidebar={toggleSidebar} user={user} />
           <Sidebar projects={projects} isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
           <div className="homediv lg:w-[calc(100%-18.22%)] w-[99%] ml-3 bg-lightase lg:h-[618px] md:h-[1150px] h-[1900px] border flex flex-col rounded-l-2xl rounded-r-2xl lg:ml-[18.22%] mt-2">
             <Routes>
               <Route path="/" element={<Dashboard summary={summary} projects={projects} />} />
-              <Route path="/projects/:_id" element={<Projects projects={projects} />} />
-              <Route path="/calender" element={<Calender events={events} setEvents={setEvents} />} />
-              <Route path="/members" element={<Members />} />
+              <Route path="/projects/:_id" element={<PrivateRoute allowedRoles={["admin", "user"]}><Projects projects={projects} /></PrivateRoute>} />
+              <Route path="/calender" element={<PrivateRoute allowedRoles={["admin", "user"]}><Calender events={events} setEvents={setEvents} /></PrivateRoute>} />
+              <Route path="/members" element={<PrivateRoute allowedRoles={["admin"]}> <Members /></PrivateRoute>} />
               <Route path="/login" element={<Navigate to="/" replace />} />
             </Routes>
           </div>

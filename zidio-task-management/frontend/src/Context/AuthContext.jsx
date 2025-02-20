@@ -8,20 +8,28 @@ export const AuthProvider = ({ children }) => {
 
     useEffect(() => {
         const token = localStorage.getItem("token");
-        if (token) {
-            setUser({ token, isAuthenticated: true });
-
-            logoutTimer.current = setTimeout(() => {
-                logout();
-            }, 3600000);
+        const storedUser = localStorage.getItem("user");
+    
+        let parsedUser = null;
+        if (storedUser) {
+            try {
+                parsedUser = JSON.parse(storedUser); 
+            } catch (error) {
+                console.error("Error parsing user data from localStorage:", error);
+                parsedUser = null;
+            }
         }
-
-        return () => clearTimeout(logoutTimer.current);
+    
+        if (token && parsedUser) {
+            setUser({ token, isAuthenticated: true, ...parsedUser });
+        }
     }, []);
+    
 
-    const login = (token) => {
+    const login = (token, userData) => {
         localStorage.setItem("token", token);
-        setUser({ token, isAuthenticated: true });
+        localStorage.setItem("user", JSON.stringify(userData)); 
+        setUser({ token, isAuthenticated: true, ...userData });
 
         if (logoutTimer.current) {
             clearTimeout(logoutTimer.current);
@@ -34,6 +42,7 @@ export const AuthProvider = ({ children }) => {
 
     const logout = () => {
         localStorage.removeItem("token");
+        localStorage.removeItem("user");
         setUser(null);
 
         clearTimeout(logoutTimer.current);

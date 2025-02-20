@@ -3,8 +3,10 @@ import Task from './tasks/Task'
 import AddTask from '../../Components/AddTask/AddTask';
 import { useParams } from 'react-router-dom';
 import { format } from 'date-fns';
+import { useAuth } from '../../Context/AuthContext';
 
 const Projects = ({ projects }) => {
+  const { user } = useAuth();
   const { _id } = useParams();
 
   const project = projects.find((proj) => proj._id === _id);
@@ -119,10 +121,10 @@ const Projects = ({ projects }) => {
           <div className="task-filter">
             <button className='filter' onClick={toggleFilterDropdown}><p><i class="ri-filter-2-line"></i></p>filter</button>
           </div>
-
-          <div className="task-add">
-            <button className='add-button' onClick={toggleModel}> + Add Task</button>
-          </div>
+          {user?.role === "admin" &&
+            <div className="task-add">
+              <button className='add-button' onClick={toggleModel}> + Add Task</button>
+            </div>}
         </div>
 
         {ismodelopen && (

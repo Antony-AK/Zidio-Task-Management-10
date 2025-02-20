@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import DisscussionForum from '../../../Components/DisscussionForum/DisscussionForum';
 import { deleteTaskFromProject } from '../../../utils/api';
+import { useAuth } from '../../../Context/AuthContext';
 
 const Task = ({ tasks = [], openModel, edittask, projectId }) => {
-    console.log("Task received:", tasks);
+    const {user} = useAuth();
 
     const todotask = tasks.filter(task => task.status === 'TODO');
     const inprogresstask = tasks.filter(task => task?.status === 'In Progress');
@@ -97,7 +98,7 @@ const Task = ({ tasks = [], openModel, edittask, projectId }) => {
 
                                         {openMenuForTask === task._id && (
                                             <div
-                                                className="absolute bg-white shadow-lg p-4 rounded-lg border z-40 w-32 flex flex-col gap-1"
+                                                className={`absolute bg-white shadow-lg p-4 rounded-lg border z-40 flex flex-col gap-1 ${user?.role === "admin" ? "w-32" : "w-18"} ` }
                                                 style={{
                                                     top: menuPosition.y + "px",
                                                     left: menuPosition.x + "px",
@@ -106,7 +107,8 @@ const Task = ({ tasks = [], openModel, edittask, projectId }) => {
                                                 
                                                 <div className="edit-delete-buttons flex gap-3 mt-1">
                                                     <button className="w-10 h-6 bg-lightgreen text-green-700 text-xs p-1" onClick={()=> openEditForm(task)}>Edit</button>
-                                                    <button className="w-12 h-6 bg-lightred text-red-700 text-xs p-1" onClick={()=> deleteTask(task._id)} >Delete</button>
+                                                    {user?.role === "admin" && 
+                                                    <button className="w-12 h-6 bg-lightred text-red-700 text-xs p-1" onClick={()=> deleteTask(task._id)} >Delete</button>}
                                                 </div>
                                             </div>
                                         )}

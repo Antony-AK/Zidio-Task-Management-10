@@ -64,7 +64,7 @@ const AddMember = ({ addOrUpdateMember, closeModel, editingMember }) => {
 
         <div className="flex justify-end gap-4">
           <button type="button" onClick={closeModel} className="cancel-button">Cancel</button>
-          <button type="submit" className="add-button2">{editingMember ? "Update Member" : "Add Member"}</button>
+          <button type="submit" className="add-button2 ">{editingMember ? "Update" : "Add"}</button>
         </div>
       </form>
     </div>

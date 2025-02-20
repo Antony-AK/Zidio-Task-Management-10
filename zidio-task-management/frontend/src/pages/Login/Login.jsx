@@ -8,6 +8,7 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
+  const [role, setRole] = useState("user");
   const [error, setError] = useState("");
   const navigate = useNavigate();
   const { login } = useAuth();
@@ -25,10 +26,18 @@ console.log("Auth Context:", authContext);
       if (isLogin) {
         response = await loginUser({ email, password });
       } else {
-        response = await signupUser({ name, email, password });
+        response = await signupUser({ name, email, password, role });
       }
 
-      login(response.token);
+      console.log("API Response:", response); 
+
+      if (!response || !response.user) {
+        throw new Error("Invalid response from server");
+      }
+
+
+
+      login(response.token, { name: response.user.name, email: response.user.email, role: response.user.role});
       navigate("/");
     } catch (err) {
       setError(err.message || "Something went wrong!");
@@ -47,6 +56,7 @@ console.log("Auth Context:", authContext);
         {error && <p className="text-red-600" >{error}</p>}
         <form onSubmit={handleSummit}>
           {!isLogin && (
+            <>
             <input
               type="text"
               placeholder="Full Name"
@@ -54,6 +64,15 @@ console.log("Auth Context:", authContext);
               onChange={(e)=> setName(e.target.value)}
               className="w-full p-3 mb-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange"
             />
+            <select
+            value={role}
+            onChange={(e) => setRole(e.target.value)}
+            className="w-full p-3 mb-3 border rounded-lg"
+          >
+            <option value="user">User</option>
+            <option value="admin">Admin</option>
+          </select>
+        </>
           )}
           <input
             type="email"

@@ -3,11 +3,13 @@ import { format, startOfMonth, endOfMonth, startOfWeek, endOfWeek, addDays, subM
 import { FaChevronLeft, FaChevronRight, FaPlus, FaTimes } from "react-icons/fa";
 import AddEvent from "./AddEvent";
 import { addEvent, updateEvent, deleteEvent } from "../../utils/api";
+import { useAuth } from "../../Context/AuthContext";
 
 
 
 const Calendar = ({events, setEvents}) => {
 
+  const {user} = useAuth();
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const monthStart = startOfMonth(currentMonth);
   const monthEnd = endOfMonth(currentMonth);
@@ -125,9 +127,10 @@ const Calendar = ({events, setEvents}) => {
         </div>
         <div className="grid grid-cols-7 h-12 border-t border-l">{renderDays()}</div>
         <div className="grid grid-cols-7 h-[445px]  border-l border-b relative">{renderCells()}</div>
+        {user?.role === "admin" && 
         <button className="mt-4 flex items-center justify-center w-10 h-10 bg-orange text-white rounded-full shadow-lg absolute bottom-5 right-5" onClick={togglemodel}>
           <FaPlus />
-        </button>
+        </button> }
       </div>
 
       {ismodelopen && (
@@ -151,10 +154,11 @@ const Calendar = ({events, setEvents}) => {
           <p className="text-sm text-gray-600">{selectedEvent.description}</p>
           <p className="text-sm font-light mt-1">{selectedEvent.startTime} - {selectedEvent.endTime}</p>
           <hr className="bg-gray-300" />
+          {user?.role === "admin" && 
           <div className="edit-delete-buttons flex gap-3 mt-1">
             <button className="w-10 h-6 bg-lightgreen text-green-700 text-xs p-1" onClick={handleEditEvent} >Edit</button>
             <button className="w-12 h-6 bg-lightred text-red-700 text-xs p-1" onClick={()=> handleDeleteEvent(selectedEvent._id)} >Delete</button>
-          </div>
+          </div>}
         </div>
       )}
 

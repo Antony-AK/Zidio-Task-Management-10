@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
 import { addTaskToProject, updateTaskInProject } from '../../utils/api';
+import { useAuth } from '../../Context/AuthContext';
 
 const AddTask = ({ addNewTask, closeModel, projectId, existingTask, updateTask }) => {
+    const {user} = useAuth();
+    const isAdmin = user?.role === "admin";
+
     const [title, setTitle] = useState(existingTask?.title || '');
     const [description, setDescription] = useState(existingTask?.description || '');
     const [priority, setPriority] = useState(existingTask?.priority || 'Low');
@@ -17,7 +21,7 @@ const AddTask = ({ addNewTask, closeModel, projectId, existingTask, updateTask }
             return;
         }
 
-        const taskData = { title, description, priority, members, status };
+        const taskData = isAdmin ? { title, description, priority, members, status } : {status};
 
         try {
             setLoading(true);
@@ -50,6 +54,7 @@ const AddTask = ({ addNewTask, closeModel, projectId, existingTask, updateTask }
                         onChange={(e) => setTitle(e.target.value)}
                         className="w-full p-2 mt-2 border rounded-lg"
                         placeholder="Enter task title"
+                        disabled={!isAdmin}
                     />
                 </div>
 
@@ -60,6 +65,7 @@ const AddTask = ({ addNewTask, closeModel, projectId, existingTask, updateTask }
                         onChange={(e) => setDescription(e.target.value)}
                         className="w-full p-2 mt-2 border rounded-lg"
                         placeholder="Enter task description"
+                        disabled={!isAdmin}
                     />
                 </div>
 
@@ -70,6 +76,7 @@ const AddTask = ({ addNewTask, closeModel, projectId, existingTask, updateTask }
                             value={priority}
                             onChange={(e) => setPriority(e.target.value)}
                             className="w-full p-2 mt-2 border rounded-lg"
+                            disabled={!isAdmin}
                         >
                             <option value="Low">Low</option>
                             <option value="Medium">Medium</option>
@@ -84,6 +91,7 @@ const AddTask = ({ addNewTask, closeModel, projectId, existingTask, updateTask }
                             onChange={(e) => setMembers(e.target.value)}
                             className="w-full p-2 mt-2 border rounded-lg"
                             placeholder="Assign members"
+                            disabled={!isAdmin}
                         />
                     </div>
                 </div>
