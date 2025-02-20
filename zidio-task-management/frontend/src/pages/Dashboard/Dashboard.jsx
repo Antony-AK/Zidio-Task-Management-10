@@ -3,9 +3,6 @@ import TriangleChart from './TriangleChart'
 import { format } from 'date-fns';
 
 const Dashboard = ({ summary, projects }) => {
-  console.log("Summary Data:", summary);
-  console.log("Type of Summary:", typeof summary);
-  console.log("Is Array:", Array.isArray(summary));
 
 
   const status_data = [

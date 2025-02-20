@@ -1,8 +1,9 @@
 import React from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 
 const Sidebar = ({ projects, toggleSidebar, isOpen }) => {
+  const location = useLocation();
 
 
   return (
@@ -26,29 +27,29 @@ const Sidebar = ({ projects, toggleSidebar, isOpen }) => {
 
         <div className="menus-logos flex mt-10 gap-5 md:ml-6 ml-2 text-lg z-50">
           <div className="left-logos space-y-5 ">
-            <p className='menuhover'><i class="ri-dashboard-horizontal-line"></i></p>
+            <p className={location.pathname === "/" ? "text-orange" : ""}><i class="ri-dashboard-horizontal-line"></i></p>
             <p className='menuhover'><i class="ri-list-check-3"></i></p>
-            <div className="logos2  space-y-4">
-              <p className='mt-44 menuhover'><i class="ri-calendar-event-line"></i></p>
-              <p className='menuhover'><i class="ri-team-line"></i></p>
+            <div className=" logos2  space-y-4">
+              <p className={ location.pathname === "/calender" ? "text-orange" : "" } style={{"marginTop": "175px"}} ><i class="ri-calendar-event-line"></i></p>
+              <p className={location.pathname === "/members" ? "text-orange" : ""} ><i class="ri-team-line"></i></p>
             </div>
           </div>
 
 
 
           <div className="right-menus flex flex-col text-lg font-main space-y-5 z-50 ">
-            <Link to='/dashboard'> <p >Dashboard</p></Link>
-            <Link to='/projects/1'> <p>Projects</p></Link>
+            <Link to='/'> <p className={location.pathname === "/" ? "text-orange" : ""} >Dashboard</p></Link>
+            <Link to='/projects/'> <p>Projects</p></Link>
             <div className="project-list flex flex-col space-y-2 text-base ml-4">
               {projects?.length > 0 ? (
               projects.map((project) => (
-                <Link to={`/projects/${project._id}`} key={project._id}><p className='' >{project.name}</p></Link>
+                <Link to={`/projects/${project._id}`} key={project._id}><p className={location.pathname === `/projects/${project._id}` ? "text-orange" : ""}>{project.name}</p></Link>
               ))) : (
                 <p>No Projects</p>
               )}
             </div>
-            <Link to='/calender'> <p >Calender</p></Link>
-            <Link to='/members'> <p>Members</p></Link>
+            <Link to='/calender'> <p className={location.pathname === "/calender" ? "text-orange" : ""}  >Calender</p></Link>
+            <Link to='/members'> <p className={location.pathname === "/members" ? "text-orange" : ""}  >Members</p></Link>
 
           </div>
 

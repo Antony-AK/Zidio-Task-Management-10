@@ -3,7 +3,7 @@ import axios from 'axios';
 const BASE_URL = "http://localhost:5001/api/projects";
 const EVENTS_API_URL = "http://localhost:5001/api/events";
 const API_URL = "http://localhost:5001/api/auth";
-
+const MEMBER_API_URL = "http://localhost:5001/api/members"
 
 
 export const fetchProjects = async () => {
@@ -117,4 +117,48 @@ export const loginUser = async (userData) => {
     } catch (error) {
         throw error.response?.data?.message || "Login failed";
     }
+};
+
+
+
+// Get all members
+export const getMembers = async () => {
+  try {
+    const response = await axios.get(MEMBER_API_URL);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching members:', error);
+    return [];
+  }
+};
+
+export const addMember = async (memberData) => {
+  try {
+    const response = await axios.post(MEMBER_API_URL, memberData);
+    return response.data;
+  } catch (error) {
+    console.error('Error adding member:', error);
+    return null;
+  }
+};
+
+export const updateMember = async (id, updatedData) => {
+    try {
+      const response = await axios.put(`${MEMBER_API_URL}/${id}`, updatedData);
+      return response.data;
+    } catch (error) {
+      console.error("Error updating member:", error.response?.data || error.message);
+      return null;
+    }
+  };
+  
+
+export const deleteMember = async (id) => {
+  try {
+    await axios.delete(`${MEMBER_API_URL}/${id}`);
+    return true;
+  } catch (error) {
+    console.error('Error deleting member:', error);
+    return false;
+  }
 };

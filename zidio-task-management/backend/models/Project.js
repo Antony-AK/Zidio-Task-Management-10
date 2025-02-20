@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const MemberSchema = new mongoose.Schema({
+const MembersSchema = new mongoose.Schema({
     name: { type: String, required: true },
     profile: { type: String, required: true },
 });
@@ -23,7 +23,7 @@ const ProjectSchema = new mongoose.Schema({
     name: { type: String, required: true },
     deadline: { type: Date, required: true },
     status: { type: String, enum: ["Pending", "In Progress", "Done"], default: "Pending" }, // Fixed status
-    members: [MemberSchema], 
+    members: [MembersSchema], 
     tasks: [TaskSchema], 
 }, { timestamps: true });
 

@@ -29,7 +29,7 @@ console.log("Auth Context:", authContext);
       }
 
       login(response.token);
-      navigate("/dashboard");
+      navigate("/");
     } catch (err) {
       setError(err.message || "Something went wrong!");
     }
