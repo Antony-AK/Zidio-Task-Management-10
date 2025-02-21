@@ -19,14 +19,14 @@ const Dashboard = ({ summary, projects }) => {
   return (
     <div>
       <div className="dashboard w-full h-full flex flex-col p-5 lg:pl-8">
-        <div className="title mb-1">
+        <div className="title mb-1" data-aos="fade-right" data-aos-duration="1700">
           <h1 className='text-2xl font-semibold'>Dashboard</h1>
           <p className='text-sm font-light'>Centralized overview of key insights.</p>
         </div>
 
         <div className="projects-details-dashboard lg:w-full md:w-[600px]  md:flex md:flex-wrap lg:flex lg:flex-nowrap justify-center items-center lg:h-48 mx-auto md:h-[410px] sm:h-[740px] mt-10 lg:p-2 gap-5 space-y-5 md:space-y-0 lg:space-y-0">
           {Object.entries(summary).map(([key, value], index) => (
-            <div key={index} className="showcase-data lg:w-72 h-40 bg-white flex flex-col rounded-2xl mx-auto px-6 py-4 transform ease-linear duration-300 hover:bg-orange shadow-md ">
+            <div key={index} className="showcase-data lg:w-72 h-40 bg-white flex flex-col rounded-2xl mx-auto px-6 py-4 transform ease-linear duration-300 hover:bg-orange shadow-md " data-aos="flip-right" data-aos-duration="1800">
               <div className="topdiv-data flex justify-between">
                 <div className="data-title">
                   <p className='font-semibold'>{key}</p>
@@ -48,7 +48,7 @@ const Dashboard = ({ summary, projects }) => {
           ))}
         </div>
 
-        <div className="dash-projects-data lg:flex justify-between w-full h-[260px] mt-5 px-3 ">
+        <div className="dash-projects-data lg:flex justify-between w-full h-[260px] mt-5 px-3 " data-aos="flip-up" data-aos-duration="1800">
           <div className="dash-projects-list lg:w-[650px] w-full h-full bg-white rounded-2xl border md:p-6 p-4 overflow-y-scroll scrollbar-hide">
             <p className='text-lg font-medium '>Projects</p>
             {projects.map((project, index) => (

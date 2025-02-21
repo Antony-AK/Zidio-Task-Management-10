@@ -114,10 +114,10 @@ const Calendar = ({events, setEvents}) => {
 
   return (
     <div className="calender w-full h-full flex flex-col  gap-5">
-      <div className="title mb-1 m-5 ml-8">
+      <div className="title mb-1 m-5 ml-8"  data-aos="fade-right" data-aos-duration="1800">
         <h1 className='text-2xl font-semibold'>Calender</h1>
       </div>
-      <div className="w-full rounded-lg  relative">
+      <div className="w-full rounded-lg  relative"  data-aos="fade-down" data-aos-duration="2000">
         <div className="flex justify-center items-center mb-5 gap-5">
           <div className="flex gap-5">
             <button onClick={handlePrevMonth} className="p-2 bg-orange ease-linear hover:scale-95 rounded-full"><FaChevronLeft /></button>

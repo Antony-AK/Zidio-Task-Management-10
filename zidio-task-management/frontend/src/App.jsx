@@ -51,7 +51,6 @@ function App() {
     AOS.init(); }, []);
 
   const toggleSidebar = () => setSidebarOpen((prev) => !prev);
-  console.log("Logged-in User:", user);
 
 
   if (loading) return <div>Loading...</div>;

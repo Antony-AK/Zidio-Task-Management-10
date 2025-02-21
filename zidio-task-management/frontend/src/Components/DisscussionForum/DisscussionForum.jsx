@@ -18,13 +18,13 @@ const DisscussionForum = ({task, onClose}) => {
 
   return (
     <div> 
-         <div className="fixed top-0 right-0 h-full w-1/2 bg-white shadow-lg p-5 transition-transform transform translate-x-0">
+         <div className="fixed top-0 right-0 h-full md:w-3/4 lg:w-1/2 bg-white shadow-lg p-5 transition-transform transform translate-x-0">
             <div className="flex justify-between items-center pb-4 border-b">
                 <h2 className="text-xl font-semibold">{task.title}</h2>
                 <button className="text-2xl" onClick={onClose}>&times;</button>
             </div>
 
-            <div className="messages h-[500px] overflow-y-scroll p-3 bg-gray-100 rounded-lg mt-4">
+            <div className="messages h-[420px] md:h-[1000px]  lg:h-[500px] overflow-y-scroll p-3 bg-gray-100 rounded-lg mt-4">
                 {messages.length === 0 ? (
                     <p className="text-gray-500">No messages yet.</p>
                 ) : (

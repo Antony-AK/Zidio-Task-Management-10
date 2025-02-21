@@ -13,8 +13,6 @@ const Login = () => {
   const navigate = useNavigate();
   const { login } = useAuth();
 
-  const authContext = useAuth();
-console.log("Auth Context:", authContext);
 
 
   const handleSummit = async (e) => {
@@ -29,7 +27,6 @@ console.log("Auth Context:", authContext);
         response = await signupUser({ name, email, password, role });
       }
 
-      console.log("API Response:", response); 
 
       if (!response || !response.user) {
         throw new Error("Invalid response from server");
@@ -45,7 +42,7 @@ console.log("Auth Context:", authContext);
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen border ">
+    <div className="flex items-center justify-center min-h-screen border " data-aos="zoom-in-up" data-aos-duration="500">
       <div className="bg-white shadow-2xl rounded-2xl p-8 max-w-sm w-full text-center">
         <h2 className="text-3xl font-bold text-orange-500 mb-4">
           {isLogin ? "Welcome Back!" : "Join Us!"}

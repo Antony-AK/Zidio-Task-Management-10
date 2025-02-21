@@ -106,7 +106,7 @@ export const signupUser = async (userData) => {
         const response = await axios.post(`${API_URL}/signup`, userData);
         return response.data;
     } catch (error) {
-        console.error("❌ Signup API Error:", error);
+        console.error("Signup API Error:", error);
         throw error.response?.data?.message || error.message || "Signup failed";
     }
 };
@@ -114,11 +114,10 @@ export const signupUser = async (userData) => {
 export const loginUser = async (userData) => {
     try {
         const response = await axios.post(`${API_URL}/login`, userData);
-        console.log("🔥 Login API Response:", response.data); 
 
         return response.data;  
     } catch (error) {
-        console.error("❌ Login Error:", error.response?.data || error);
+        console.error("Login Error:", error.response?.data || error);
         throw error.response?.data?.message || "Login failed";
     }
 };
