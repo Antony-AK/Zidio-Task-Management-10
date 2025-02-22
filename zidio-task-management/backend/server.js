@@ -8,7 +8,7 @@ const app = express();
 
 app.use(express.json());
 app.use(cors({ origin: "http://localhost:5173", credentials: true }));
-app.use('/uploads', express.static('public/images'));
+app.use('/uploads', express.static(path.join(__dirname, 'public/images')));
 
 const projectRoutes = require("./routes/projectRoutes");
 const eventRoutes = require("./routes/eventRoutes");

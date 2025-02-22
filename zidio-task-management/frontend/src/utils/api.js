@@ -1,9 +1,9 @@
 import axios from 'axios';
 
-const BASE_URL = "http://localhost:5001/api/projects";
-const EVENTS_API_URL = "http://localhost:5001/api/events";
-const API_URL = "http://localhost:5001/api/auth";
-const MEMBER_API_URL = "http://localhost:5001/api/members"
+const BASE_URL = "https://zidio-task-management-10.onrender.com/api/projects";
+const EVENTS_API_URL = "https://zidio-task-management-10.onrender.com/api/events";
+const API_URL = "https://zidio-task-management-10.onrender.com/api/auth";
+const MEMBER_API_URL = "https://zidio-task-management-10.onrender.com/api/members"
 
 
 export const fetchProjects = async () => {
