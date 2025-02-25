@@ -12,7 +12,7 @@ const storage = new CloudinaryStorage({
         format: async () => "jpg", 
         public_id: (req, file) => file.originalname.split(".")[0],
     },
-});
+});cd
 
 const upload = multer({ storage });
 
