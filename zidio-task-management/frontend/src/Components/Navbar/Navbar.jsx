@@ -13,7 +13,7 @@ const Navbar = ({toggleSidebar, user}) => {
         </div>
 
         <div className='serach-bar md:w-80 bg-white h-9 m-5 rounded-l-2xl rounded-r-2xl md:ml-10 p-1 relative ' data-aos="fade-left" data-aos-duration="1500" >
-          <input type="text" className='md:w-full w-28 h-full p-2 outline-none relative' />
+          <input type="text" className='md:w-full w-28 h-full p-2 pl-12 outline-none relative' />
           <p className='absolute top-1 left-5 text-lg '><i class="ri-search-line"></i></p>
         </div>
 

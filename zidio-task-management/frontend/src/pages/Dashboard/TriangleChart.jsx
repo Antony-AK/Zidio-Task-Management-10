@@ -6,7 +6,6 @@ const TriangleChart = ({ data }) => {
         <div className="md:w-[470px] mt-10 lg:mt-0 h-full mx-auto p-5 bg-white rounded-lg shadow-md">
             <h3 className="text-lg font-semibold text-center mb-3">Projects Progress</h3>
             <div className="flex items-center justify-between">
-                {/* Left legend */}
                 <div className="flex flex-col gap-2">
                     {data.slice(0, Math.ceil(data.length / 2)).map((entry, index) => (
                         <div key={index} className="flex items-center gap-2">
@@ -16,7 +15,6 @@ const TriangleChart = ({ data }) => {
                     ))}
                 </div>
 
-                {/* Pie Chart in Center */}
                 <ResponsiveContainer width={150} height={150}>
                     <PieChart>
                         <Pie
@@ -35,7 +33,6 @@ const TriangleChart = ({ data }) => {
                     </PieChart>
                 </ResponsiveContainer>
 
-                {/* Right legend */}
                 <div className="flex flex-col gap-2">
                     {data.slice(Math.ceil(data.length / 2)).map((entry, index) => (
                         <div key={index} className="flex items-center gap-2">

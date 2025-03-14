@@ -33,7 +33,7 @@ const Sidebar = ({ projects, toggleSidebar, isOpen }) => {
             <p className='menuhover'><i class="ri-list-check-3"></i></p>
             <div className=" logos2  space-y-4 ">
               <p className={`{ location.pathname === "/calender" ? "text-orange" : ""}   mt-[175px] md:mt-[199px] lg:mt-[175px] `} ><i class="ri-calendar-event-line"></i></p>
-              {user?.role === "admin" &&
+              {user?.role === "manager" &&
                 <p className={location.pathname === "/members" ? "text-orange" : ""} ><i class="ri-team-line"></i></p>
               }
             </div>
@@ -53,7 +53,7 @@ const Sidebar = ({ projects, toggleSidebar, isOpen }) => {
               )}
             </div>
             <Link to='/calender'> <p className={location.pathname === "/calender" ? "text-orange" : ""}  >Calender</p></Link>
-            {user?.role === "admin" &&
+            {user?.role === "manager" &&
               <Link to='/members'> <p className={location.pathname === "/members" ? "text-orange" : ""}  >Members</p></Link>
             }
 

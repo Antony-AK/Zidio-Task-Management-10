@@ -67,6 +67,7 @@ const Login = () => {
             className="w-full p-3 mb-3 border rounded-lg"
           >
             <option value="user">User</option>
+            <option value="manager">Manager</option>
             <option value="admin">Admin</option>
           </select>
         </>

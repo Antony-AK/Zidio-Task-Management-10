@@ -6,7 +6,7 @@ const Dashboard = ({ summary, projects }) => {
 
 
   const status_data = [
-    { name: "Pending", value: 10, fill: "#FF0000" },
+    { name: "Pending", value: 10, fill: "#FF0000" },                      
     { name: "In Progress", value: 90, fill: "#ffa500" },
     { name: "Completed", value: 0, fill: "#32cd32" }
   ];

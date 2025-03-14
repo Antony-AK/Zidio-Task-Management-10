@@ -121,7 +121,7 @@ const Projects = ({ projects }) => {
           <div className="task-filter">
             <button className='filter' onClick={toggleFilterDropdown}><p><i class="ri-filter-2-line"></i></p>filter</button>
           </div>
-          {user?.role === "admin" &&
+          {user?.role === "manager" &&
             <div className="task-add">
               <button className='add-button' onClick={toggleModel}> + Add Task</button>
             </div>}

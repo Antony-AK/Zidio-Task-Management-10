@@ -127,7 +127,7 @@ const Calendar = ({events, setEvents}) => {
         </div>
         <div className="grid grid-cols-7 h-12 border-t border-l">{renderDays()}</div>
         <div className="grid grid-cols-7 h-[445px]  border-l border-b relative">{renderCells()}</div>
-        {user?.role === "admin" && 
+        {user?.role === "manager" && 
         <button className="mt-4 flex items-center justify-center w-10 h-10 bg-orange text-white rounded-full shadow-lg absolute bottom-5 right-5" onClick={togglemodel}>
           <FaPlus />
         </button> }

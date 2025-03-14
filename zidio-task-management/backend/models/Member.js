@@ -9,4 +9,4 @@ const memberSchema = new mongoose.Schema({
     profile: String
 });
 
-module.exports = mongoose.model('Member', memberSchema);
+module.exports = mongoose.model('Member', memberSchema);  
