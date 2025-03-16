@@ -12,6 +12,7 @@ const PrivateRoute = ({ children, allowedRoles }) => {
     return <Navigate to="/" replace />;
   }
 
+
   return children;
 };
 

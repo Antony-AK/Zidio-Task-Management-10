@@ -6,7 +6,7 @@ const MembersSchema = new mongoose.Schema({
 });
 
 const TaskSchema = new mongoose.Schema({
-    status: { 
+    _id: { type: mongoose.Schema.Types.ObjectId, auto: true },     status: { 
         type: String, 
         enum: ["TODO", "In Progress", "Review", "Done"],
         required: true 
@@ -17,6 +17,7 @@ const TaskSchema = new mongoose.Schema({
     profilePics: [{ type: String, required: true }],
     discussions: { type: Number, default: '' },
     priority: { type: String, enum: ["High", "Medium", "Low"], required: true },
+    completedAt: { type: Date } 
 });
 
 const ProjectSchema = new mongoose.Schema({

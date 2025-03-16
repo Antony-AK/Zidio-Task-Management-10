@@ -4,7 +4,7 @@ import { useAuth } from '../../Context/AuthContext';
 
 const AddTask = ({ addNewTask, closeModel, projectId, existingTask, updateTask }) => {
     const {user} = useAuth();
-    const isAdmin = user?.role === "admin";
+    const isAdmin = user?.role === "manager";
 
     const [title, setTitle] = useState(existingTask?.title || '');
     const [description, setDescription] = useState(existingTask?.description || '');

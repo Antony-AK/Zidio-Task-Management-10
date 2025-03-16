@@ -6,9 +6,9 @@ const Dashboard = ({ summary, projects }) => {
 
 
   const status_data = [
-    { name: "Pending", value: 10, fill: "#FF0000" },                      
-    { name: "In Progress", value: 90, fill: "#ffa500" },
-    { name: "Completed", value: 0, fill: "#32cd32" }
+    { name: "Pending", value: summary?.PendingProjects || 0, fill: "#FF0000" },
+    { name: "In Progress", value: summary?.RunningProjects || 0, fill: "#ffa500" },
+    { name: "Completed", value: summary?.EndedProjects || 0, fill: "#32cd32" }
   ];
 
   const formattedDeadline = format(new Date(projects[0]?.deadline), 'yyyy-MM-dd');
@@ -49,7 +49,7 @@ const Dashboard = ({ summary, projects }) => {
         </div>
 
         <div className="dash-projects-data lg:flex justify-between w-full h-[260px] mt-5 px-3 " data-aos="flip-up" data-aos-duration="1800">
-          <div className="dash-projects-list lg:w-[650px] w-full h-full bg-white rounded-2xl border md:p-6 p-4 overflow-y-scroll scrollbar-hide">
+          <div className="dash-projects-list lg:w-[600px] w-full h-full bg-white rounded-2xl border md:p-6 p-4 overflow-y-scroll scrollbar-hide">
             <p className='text-lg font-medium '>Projects</p>
             {projects.map((project, index) => (
               <div key={index} className="project-data-status flex justify-between lg:mx-16 mt-3 mx-auto">

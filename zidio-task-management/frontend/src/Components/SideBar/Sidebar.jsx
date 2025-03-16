@@ -27,39 +27,60 @@ const Sidebar = ({ projects, toggleSidebar, isOpen }) => {
           <h5 className='text-lg font-normal mt-0'>Developers</h5>
         </div>
 
-        <div className="menus-logos flex mt-10 gap-5 md:ml-6 ml-2 text-lg z-50">
-          <div className="left-logos space-y-5 " data-aos="fade-right" data-aos-duration="1600">
-            <p className={location.pathname === "/" ? "text-orange" : ""}><i class="ri-dashboard-horizontal-line"></i></p>
-            <p className='menuhover'><i class="ri-list-check-3"></i></p>
-            <div className=" logos2  space-y-4 ">
-              <p className={`{ location.pathname === "/calender" ? "text-orange" : ""}   mt-[175px] md:mt-[199px] lg:mt-[175px] `} ><i class="ri-calendar-event-line"></i></p>
-              {user?.role === "manager" &&
-                <p className={location.pathname === "/members" ? "text-orange" : ""} ><i class="ri-team-line"></i></p>
-              }
-            </div>
-          </div>
-
-
-
-          <div className="right-menus flex flex-col text-lg font-main space-y-5 z-50 " data-aos="fade-right" data-aos-duration="1500">
-            <Link to='/'> <p className={location.pathname === "/" ? "text-orange" : ""} >Dashboard</p></Link>
-            <Link to='/projects/'> <p className='pointer-events-none' >Projects</p></Link>
-            <div className="project-list flex flex-col space-y-2 text-base ml-4">
-              {projects?.length > 0 ? (
-                projects.map((project) => (
-                  <Link to={`/projects/${project._id}`} key={project._id}><p className={location.pathname === `/projects/${project._id}` ? "text-orange" : ""}>{project.name}</p></Link>
-                ))) : (
-                <p>No Projects</p>
-              )}
-            </div>
-            <Link to='/calender'> <p className={location.pathname === "/calender" ? "text-orange" : ""}  >Calender</p></Link>
-            {user?.role === "manager" &&
+        {user?.role === "admin" ? (
+            <div className=" menus-logos flex mt-10 gap-5 md:ml-6 ml-2 text-lg z-50">
+              <div className="left-logos space-y-5 " data-aos="fade-right" data-aos-duration="1600">
+                <p className={location.pathname === "/" ? "text-orange" : ""}><i class="ri-dashboard-horizontal-line"></i></p>
+                <p className='menuhover'><i class="ri-list-check-3"></i></p>
+                <div className=" logos2  space-y-4 ">
+                  <p className={`${location.pathname === "/calender" ? "text-orange" : ""} mt-[175px] md:mt-[199px] lg:mt-[175px]  `} ><i class="ri-calendar-event-line"></i></p>
+                  <p className={location.pathname === "/members" ? "text-orange" : ""} ><i class="ri-team-line"></i></p>
+                </div>
+              </div>
+            
+            <div className="right-menus flex flex-col text-lg font-main space-y-5 z-50 " data-aos="fade-right" data-aos-duration="1500">
+              <Link to='/'> <p className={location.pathname === "/" ? "text-orange" : ""} >Dashboard</p></Link>
+              <Link to='/projectdetail'> <p className={location.pathname === "/projectdetail" ? "text-orange" : ""} >Projects</p></Link>
+              <div className="project-list flex flex-col space-y-2 text-base ml-4">
+                {projects?.length > 0 ? (
+                  projects.map((project) => (
+                    <Link to={`/projectdetail/${project._id}`} key={project._id}><p className={location.pathname === `/projectdetail/${project._id}` ? "text-orange" : ""}>{project.name}</p></Link>
+                  ))) : (
+                  <p>No Projects</p>
+                )}
+              </div>
+              <Link to='/calender'> <p className={location.pathname === "/calender" ? "text-orange" : ""}  >Calender</p></Link>
               <Link to='/members'> <p className={location.pathname === "/members" ? "text-orange" : ""}  >Members</p></Link>
-            }
+            </div>
+          </div>
+        ) : (
+          <div className="menus-logos flex mt-10 gap-5 md:ml-6 ml-2 text-lg z-50">
+            <div className="left-logos space-y-5 " data-aos="fade-right" data-aos-duration="1600">
+            <p className={location.pathname === "/" ? "text-orange" : ""}><i class="ri-dashboard-horizontal-line"></i></p>
+              <p className='menuhover'><i class="ri-list-check-3"></i></p>
+              <div className=" logos2  space-y-4 ">
+                <p className={`${ location.pathname === "/calender" ? "text-orange" : ""}   mt-[175px] md:mt-[199px] lg:mt-[175px] `} ><i class="ri-calendar-event-line"></i></p>
+              </div>
+            </div>
+
+
+
+            <div className="right-menus flex flex-col text-lg font-main space-y-5 z-50 " data-aos="fade-right" data-aos-duration="1500">
+            <Link to='/'> <p className={location.pathname === "/" ? "text-orange" : ""} >Dashboard</p></Link>
+              <Link to='/projects'> <p className='pointer-events-none' >Projects</p></Link>
+              <div className="project-list flex flex-col space-y-2 text-base ml-4">
+                {projects?.length > 0 ? (
+                  projects.map((project) => (
+                    <Link to={`/projects/${project._id}`} key={project._id}><p className={location.pathname === `/projects/${project._id}` ? "text-orange" : ""}>{project.name}</p></Link>
+                  ))) : (
+                  <p>No Projects</p>
+                )}
+              </div>
+              <Link to='/calender'> <p className={location.pathname === "/calender" ? "text-orange" : ""}  >Calender</p></Link>
+            </div>
 
           </div>
-
-        </div>
+        )}
 
         <div className="logout flex flex-row md:mt-36 mt-16 gap-4 md:ml-6 ml-2 text-lg font-main menuhover" >
           <p className=''><i class="ri-logout-circle-line "></i></p>

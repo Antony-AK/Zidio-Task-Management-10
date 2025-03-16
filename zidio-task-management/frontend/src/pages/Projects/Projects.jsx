@@ -69,7 +69,7 @@ const Projects = ({ projects }) => {
 
         <div className="project-details flex gap-5 mt-5 lg:w-3/4 w-full overflow-hidden">
 
-          <div className="details-icons flex flex-col space-y-5 text-[#A7A7A7]"  data-aos="fade-left" data-aos-duration="2000">
+          <div className="details-icons flex flex-col space-y-5 text-[#A7A7A7]" data-aos="fade-left" data-aos-duration="2000">
             <p className='font-textcolorase'><i class="ri-eye-line"></i></p>
             <p><i class="ri-user-follow-line"></i></p>
             <p><i class="ri-calendar-schedule-line"></i></p>
@@ -77,20 +77,20 @@ const Projects = ({ projects }) => {
           </div>
 
 
-          <div className="details-left flex flex-col space-y-5 text-[#A7A7A7]"  data-aos="fade-left" data-aos-duration="2000">
+          <div className="details-left flex flex-col space-y-5 text-[#A7A7A7]" data-aos="fade-left" data-aos-duration="2000">
             <p>visibility</p>
             <p className='w-[85px]'>Assigned to</p>
             <p>Deadline</p>
             <p>Tags</p>
           </div>
 
-          <div className="details-data flex flex-col space-y-5"  data-aos="fade-left" data-aos-duration="1800">
+          <div className="details-data flex flex-col space-y-5" data-aos="fade-left" data-aos-duration="1800">
             <div className="visibility-details w-28 h-6 gap-1 bg-lightred text-red-600 flex text-center justify-center rounded-2xl text-sm">
               <p><i class="ri-lock-2-line"></i></p>
               <p>Private Board</p>
             </div>
 
-            <div className="members-list md:w-full w-20  flex gap-3 overflow-x-scroll scrollbar-hide"  data-aos="fade-left" data-aos-duration="2000">
+            <div className="members-list md:w-full w-20  flex gap-3 overflow-x-scroll scrollbar-hide" data-aos="fade-left" data-aos-duration="2000">
               {project?.members?.map((member) => (
                 <div key={member._id} className="members md:w-28 h-7 gap-2 bg-white flex text-center items-center  rounded-2xl pl-2 pe-2">
                   <div className="member-profile w-6 h-6 rounded-full  ">
@@ -99,16 +99,13 @@ const Projects = ({ projects }) => {
                   <p className='pb-1 text-sm'>{member.name}</p>
                 </div>
               ))}
-
-
-
             </div>
 
-            <div className="deadline-date"  data-aos="fade-left" data-aos-duration="1800">
+            <div className="deadline-date" data-aos="fade-left" data-aos-duration="1800">
               <p className='text-sm font-medium'>{formattedDeadline}</p>
             </div>
 
-            <div className="tags-list flex gap-5"  data-aos="fade-left" data-aos-duration="1800">
+            <div className="tags-list flex gap-5" data-aos="fade-left" data-aos-duration="1800">
               <div className="tags w-28 h-6 gap-1 bg-blue-200 text-blue-600 flex text-center justify-center rounded-2xl text-sm">
                 <p>{project?.status}</p>
               </div>
@@ -117,7 +114,7 @@ const Projects = ({ projects }) => {
 
         </div>
 
-        <div className="tasks-head-button flex justify-end gap-5 lg:mt-[-33px] mt-7"  data-aos="fade-right" data-aos-duration="1800">
+        <div className="tasks-head-button flex justify-end gap-5 lg:mt-[-33px] mt-7" data-aos="fade-right" data-aos-duration="1800">
           <div className="task-filter">
             <button className='filter' onClick={toggleFilterDropdown}><p><i class="ri-filter-2-line"></i></p>filter</button>
           </div>

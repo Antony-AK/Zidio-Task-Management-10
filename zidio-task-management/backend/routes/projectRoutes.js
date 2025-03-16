@@ -40,6 +40,7 @@ router.post("/:projectId/tasks", async (req, res) => {
 
 
         const newTask = { 
+            _id: new mongoose.Types.ObjectId(),
             status, 
             title, 
             description, 
@@ -62,8 +63,6 @@ router.post("/:projectId/tasks", async (req, res) => {
 
 
 
-
-
 // Update task in project
 router.put("/:projectId/tasks/:taskId", async (req, res) => {
     try {
@@ -82,7 +81,13 @@ router.put("/:projectId/tasks/:taskId", async (req, res) => {
         }
 
         Object.assign(task, req.body);
-        project.markModified("tasks"); 
+
+        // If the status is updated to "Done", set the completedAt timestamp
+        if (req.body.status === "Done" && !task.completedAt) {
+            task.completedAt = new Date();
+        }
+
+        project.markModified("tasks");
         await project.save();
 
         res.status(200).json({ message: "Task updated successfully", task });
@@ -90,6 +95,7 @@ router.put("/:projectId/tasks/:taskId", async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 });
+
 
 
 router.delete("/:projectId/tasks/:taskId", async (req, res) => {
@@ -181,6 +187,67 @@ router.get("/summary", async (req, res) => {
         res.status(500).json({ message: "Server error" });
     }
 });
+
+router.get("/:projectId/tasks-summary", async (req, res) => {
+    try {
+        const { projectId } = req.params;
+        const project = await Project.findById(projectId);
+
+        if (!project) {
+            return res.status(404).json({ message: "Project not found" });
+        }
+
+        // Initialize counts
+        const taskCounts = {
+            TODO: 0,
+            "In Progress": 0,
+            Review: 0,
+            Done: 0,
+        };
+
+        // Count the number of tasks for each status
+        project.tasks.forEach(task => {
+            if (taskCounts.hasOwnProperty(task.status)) {
+                taskCounts[task.status]++;
+            }
+        });
+
+        res.status(200).json({
+            projectId: project._id,
+            projectName: project.name,
+            taskSummary: taskCounts,
+        });
+    } catch (error) {
+        console.error("Error fetching task summary:", error);
+        res.status(500).json({ message: "Server error" });
+    }
+});
+
+
+router.get("/:projectId/completed-tasks", async (req, res) => {
+    try {
+        const { projectId } = req.params;
+        const project = await Project.findById(projectId);
+
+        if (!project) {
+            return res.status(404).json({ message: "Project not found" });
+        }
+
+        const completedTasks = project.tasks
+            .filter(task => task.status === "Done" && task.completedAt)
+            .map(task => ({
+                title: task.title,
+                completedAt: task.completedAt
+            }));
+
+        res.status(200).json(completedTasks);
+    } catch (error) {
+        console.error("Error fetching completed tasks:", error);
+        res.status(500).json({ message: "Server error" });
+    }
+});
+
+
 
 
 module.exports = router; 

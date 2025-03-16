@@ -58,6 +58,31 @@ export const fetchSummary = async () => {
     }
 };
 
+//barchart
+export const fetchTaskSummary = async (projectId) => {
+    try {
+        const response = await axios.get(`http://localhost:5001/api/projects/${projectId}/tasks-summary`);
+        return response.data;
+    } catch (error) {
+        console.error("Error fetching task summary:", error);
+        return null;
+    }
+};
+
+//linechart
+export const fetchCompletedTasks = async (projectId) => {
+    try {
+        const response = await fetch(`http://localhost:5001/api/projects/${projectId}/completed-tasks`);
+        if (!response.ok) throw new Error("Failed to fetch completed tasks");
+        return await response.json();
+    } catch (error) {
+        console.error("Error fetching completed tasks:", error);
+        return [];
+    }
+};
+
+
+
 //calender events
 export const fetchEvents = async () => {
     try {

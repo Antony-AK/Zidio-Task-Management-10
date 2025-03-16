@@ -87,7 +87,7 @@ const Task = ({ tasks = [], openModel, edittask, projectId }) => {
                               >
                                 ...
                               </div>
-                              {openMenuForTask === task._id && user?.role === "admin" && (
+                              {openMenuForTask === task._id && user?.role === "manager" && (
                                 <div className={`absolute top-4 right-0 bg-white shadow-lg p-4 rounded-lg border z-40 flex gap-1 ${user?.role === "admin" ? "w-32" : "w-18"} `}>
                                   <button className="w-10 h-6 bg-lightgreen text-green-700 text-xs p-1" onClick={() => { edittask(task); openModel(); }}>Edit</button>
                                   <button className="w-12 h-6 bg-lightred text-red-700 text-xs p-1" onClick={() => deleteTask(task._id)}>Delete</button>

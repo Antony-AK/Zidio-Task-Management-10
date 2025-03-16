@@ -114,10 +114,10 @@ const Calendar = ({events, setEvents}) => {
 
   return (
     <div className="calender w-full h-full flex flex-col  gap-5">
-      <div className="title mb-1 m-5 ml-8"  data-aos="fade-right" data-aos-duration="1800">
+      <div className="title mb-1 m-5 ml-8"  data-aos="fade-right" data-aos-duration="800">
         <h1 className='text-2xl font-semibold'>Calender</h1>
       </div>
-      <div className="w-full rounded-lg  relative"  data-aos="fade-down" data-aos-duration="2000">
+      <div className="w-full rounded-lg  relative"  data-aos="fade-down" data-aos-duration="1000">
         <div className="flex justify-center items-center mb-5 gap-5">
           <div className="flex gap-5">
             <button onClick={handlePrevMonth} className="p-2 bg-orange ease-linear hover:scale-95 rounded-full"><FaChevronLeft /></button>
@@ -127,7 +127,7 @@ const Calendar = ({events, setEvents}) => {
         </div>
         <div className="grid grid-cols-7 h-12 border-t border-l">{renderDays()}</div>
         <div className="grid grid-cols-7 h-[445px]  border-l border-b relative">{renderCells()}</div>
-        {user?.role === "manager" && 
+        {user?.role === "manager" || user?.role === "admin" &&
         <button className="mt-4 flex items-center justify-center w-10 h-10 bg-orange text-white rounded-full shadow-lg absolute bottom-5 right-5" onClick={togglemodel}>
           <FaPlus />
         </button> }
@@ -154,7 +154,7 @@ const Calendar = ({events, setEvents}) => {
           <p className="text-sm text-gray-600">{selectedEvent.description}</p>
           <p className="text-sm font-light mt-1">{selectedEvent.startTime} - {selectedEvent.endTime}</p>
           <hr className="bg-gray-300" />
-          {user?.role === "admin" && 
+          {user?.role === "manager" || user?.role === "admin" &&
           <div className="edit-delete-buttons flex gap-3 mt-1">
             <button className="w-10 h-6 bg-lightgreen text-green-700 text-xs p-1" onClick={handleEditEvent} >Edit</button>
             <button className="w-12 h-6 bg-lightred text-red-700 text-xs p-1" onClick={()=> handleDeleteEvent(selectedEvent._id)} >Delete</button>

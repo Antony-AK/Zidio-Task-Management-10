@@ -13,6 +13,7 @@ import { useEffect, useState } from "react";
 import { fetchProjects, fetchSummary, fetchEvents } from "./utils/api";
 import { useAuth } from "./Context/AuthContext";
 import PrivateRoute from "./PrivateRoute/PrivateRoute";
+import ProjectDetails from "./pages/Admin/ProjectList/ProjectDetails/ProjectDetails";
 
 function App() {
   const { user } = useAuth();
@@ -68,9 +69,10 @@ function App() {
             <Routes>
               <Route path="/" element={<Dashboard summary={summary} projects={projects} />} />
               <Route path="/projects/:_id" element={<PrivateRoute allowedRoles={["manager", "user"]}><Projects projects={projects} /></PrivateRoute>} />
-              <Route path="/calender" element={<PrivateRoute allowedRoles={["manager", "user"]}><Calender events={events} setEvents={setEvents} /></PrivateRoute>} />
+              <Route path="/calender" element={<PrivateRoute allowedRoles={["admin", "manager", "user"]}><Calender events={events} setEvents={setEvents} /></PrivateRoute>} />
               <Route path="/members" element={<PrivateRoute allowedRoles={["admin"]}> <Members /></PrivateRoute>} />
               <Route path="/login" element={<Navigate to="/" replace />} />
+              <Route path="/projectdetail/:_id"  element={<PrivateRoute allowedRoles={["admin"]}><ProjectDetails projects={projects} /></PrivateRoute>} />
             </Routes>
           </div>
         </div>
