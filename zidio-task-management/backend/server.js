@@ -8,6 +8,7 @@ const { Server } = require("socket.io");
 dotenv.config();
 const app = express();
 const server = http.createServer(app); 
+
 app.use(express.json());
 app.use(cors({ origin: "http://localhost:5173", credentials: true }));
 
@@ -16,6 +17,7 @@ const eventRoutes = require("./routes/eventRoutes");
 const authRoutes = require("./routes/authRoutes");
 const memberRoutes = require("./routes/memberRoutes");
 const uploadRoutes = require("./routes/uploadRoutes");
+const Message = require("./models/Message");  
 
 app.use("/api/projects", projectRoutes);
 app.use("/api/events", eventRoutes);
@@ -30,12 +32,31 @@ const io = new Server(server, {
     }
 });
 
-io.on("connection", (socket) => {
+io.on("connection", async (socket) => {
     console.log("🟢 User Connected:", socket.id);
 
-    socket.on("sendMessage", (data) => {
+    try {
+        const messages = await Message.find().sort({ createdAt: 1 });
+        socket.emit("loadMessages", messages);
+    } catch (error) {
+        console.error("❌ Error fetching messages:", error);
+    }
+
+    socket.on("sendMessage", async (data) => {
         console.log("📩 Message received:", data);
-        io.emit("receiveMessage", data); 
+
+        try {
+            const newMessage = new Message({
+                text: data.text,
+                sender: data.sender,
+                createdAt: new Date(),
+            });
+
+            await newMessage.save();  
+            io.emit("receiveMessage", newMessage);  
+        } catch (error) {
+            console.error("❌ Error saving message:", error);
+        }
     });
 
     socket.on("disconnect", () => {

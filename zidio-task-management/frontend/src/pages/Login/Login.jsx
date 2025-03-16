@@ -37,7 +37,7 @@ const Login = () => {
       login(response.token, { name: response.user.name, email: response.user.email, role: response.user.role});
       navigate("/");
     } catch (err) {
-      setError(err.message || "Something went wrong!");
+      setError(alert(err.message || " Invalid password or Something went wrong!"));
     }
   };
 

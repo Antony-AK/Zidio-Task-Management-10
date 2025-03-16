@@ -49,6 +49,8 @@ const Task = ({ tasks = [], openModel, edittask, projectId }) => {
     }
   };
 
+
+
   return (
     <div>
       <DragDropContext onDragEnd={onDragEnd}>
@@ -131,7 +133,7 @@ const Task = ({ tasks = [], openModel, edittask, projectId }) => {
         </div>
       </DragDropContext>
 
-      {selectedTask && <DisscussionForum task={selectedTask} onClose={() => setSelectedTask(null)} />}
+      {selectedTask && <DisscussionForum task={selectedTask} onClose={() => setSelectedTask(null)} currentUser={user} />}
     </div>
   );
 };
