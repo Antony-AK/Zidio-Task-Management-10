@@ -8,6 +8,7 @@ const AddEvent = ({addnewevent, existingEvent}) => {
     const [etime, setEtime] = useState(existingEvent?.endTime || '');
 
 
+
     const handlesubmit = async (e) => {
         e.preventDefault();
 
@@ -27,6 +28,9 @@ const AddEvent = ({addnewevent, existingEvent}) => {
             endTime: etime,
             color: "bg-blue-300",
         };
+
+        console.log("Event Data Being Sent ➡️:", eventDetails);
+
 
         try{
             await addnewevent(eventDetails);

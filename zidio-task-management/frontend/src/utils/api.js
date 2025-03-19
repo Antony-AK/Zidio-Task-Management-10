@@ -97,7 +97,7 @@ export const fetchEvents = async () => {
 export const addEvent = async (eventData) => {
     try {
         const response = await axios.post(`${EVENTS_API_URL}/addevent`, eventData);
-        return response.data;
+        return response.data.newEvent;
     } catch (error) {
         console.error("Error adding event:", error);
         throw error;
@@ -191,3 +191,18 @@ export const deleteMember = async (id) => {
     return false;
   }
 };
+
+
+export const fetchNotifications = async () => {
+    try {
+      const res = await fetch("http://localhost:5001/api/notifications");
+      const data = await res.json();
+      console.log("API Response:", data);
+      return Array.isArray(data) ? data : []; 
+      // Ensure it's always an array
+    } catch (error) {
+      console.error("❌ Error fetching notifications:", error);
+      return [];
+    }
+  };
+  
