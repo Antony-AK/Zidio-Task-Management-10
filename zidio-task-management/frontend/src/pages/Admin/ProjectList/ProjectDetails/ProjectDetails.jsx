@@ -27,8 +27,7 @@ const ProjectDetails = ({ projects }) => {
     }, [_id]);
 
    
-      const meetLink = "https://meet.google.com/your-meeting-id";
-    
+    const meetLink = "https://meet.google.com/your-meeting-id";
 
     return (
         <div className="w-full h-full flex flex-col p-5 lg:pl-8">
@@ -36,8 +35,8 @@ const ProjectDetails = ({ projects }) => {
                 <h1 className='text-2xl font-semibold '>{project?.name}</h1>
             </div>
 
-            <div className="top-charts flex gap-5 mt-5">
-                <div className="taskchart w-[60%] h-[300px]" >
+            <div className="top-charts flex flex-col md:flex-row gap-5 mt-5">
+                <div className="taskchart w-full md:w-[60%] h-[300px]" >
                     <TaskChart projectId={_id} />
                 </div>
 
@@ -46,17 +45,17 @@ const ProjectDetails = ({ projects }) => {
                 </div>
             </div>
 
-            <div className="bottom-charts w-full h-96 mt-5 flex gap-5" data-aos="flip-down" data-aos-duration="2000">
-                <div className="members-list md:w-[500px] w-30 h-52  flex flex-col gap-3  p-2  bg-white rounded-lg  shadow-lg overflow-y-scroll scrollbar-hide">
-                    <h2 className="font-semibold text-lg p-2" >Team Collaboration</h2>
+            <div className="bottom-charts w-full md:h-96 mt-5 flex flex-col md:flex-row gap-5" data-aos="flip-down" data-aos-duration="2000">
+                <div className="members-list md:w-[500px] w-30 h-80 md:h-52  flex flex-col gap-3  p-2  bg-white rounded-lg  shadow-lg overflow-y-scroll scrollbar-hide">
+                    <h2 className="font-semibold md:text-lg p-2" >Team Collaboration</h2>
                     {project?.members?.map((member) => (
-                        <div key={member._id} className="members md:w-[90%] mx-auto bg-gray-200/60 mb-1  gap-2 bg- flex text-center items-center  rounded-2xl pl-2 pe-2">
-                            <div className="member-profile w-10 h-10 rounded-full  ">
+                        <div key={member._id} className="members md:w-[90%]  mx-auto bg-gray-200/60 mb-1  gap-2 bg- flex text-center items-center  rounded-2xl pl-2 pe-2">
+                            <div className="member-profile w-7 h-7 md:w-10 md:h-10 rounded-full  ">
                                 <img src={member.profile} alt="" className='rounded-full' />
                             </div>
                             <div className="admin-memeber-details p-1">
-                                <p className=' text-left text-md font-semibold'>{member.name}</p>
-                                <p className="font-medium"><span className="text-slate-500 font-normal text-sm me-1">Working on:</span>Responsive Navbar</p>
+                                <p className=' text-left text-sm md:text-md font-semibold'>{member.name}</p>
+                                <p className="text-sm font-normal md:font-medium"><span className="text-slate-500  md:font-normal text-xs md:text-sm me-1">Working on:</span>Responsive Navbar</p>
                             </div>
 
                         </div>

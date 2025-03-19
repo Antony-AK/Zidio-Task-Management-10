@@ -82,7 +82,7 @@ const Sidebar = ({ projects, toggleSidebar, isOpen }) => {
           </div>
         )}
 
-        <div className="logout flex flex-row md:mt-36 mt-16 gap-4 md:ml-6 ml-2 text-lg font-main menuhover" >
+        <div className="logout flex flex-row md:mt-36 mt-4 gap-4 md:ml-6 ml-2 text-lg font-main menuhover" >
           <p className=''><i class="ri-logout-circle-line "></i></p>
           <Link to='/login' ><a href="#login" className=''>Logout</a></Link>
 

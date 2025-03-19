@@ -102,7 +102,7 @@ const Calendar = ({events, setEvents}) => {
             {format(day, "d")}
           </span>
           {event && (
-            <div className={`event-showcase text-xs md:text-sm text-white p-1 rounded mt-2 md:mt-0 ${event.color} cursor-pointer`} onClick={(e) => handleEventClick(event, { x: e.clientX, y: e.clientY })} >{event.title}</div>
+            <div className={`event-showcase text-[8px] md:text-sm text-white p-1 rounded mt-2 md:mt-0 ${event.color} cursor-pointer`} onClick={(e) => handleEventClick(event, { x: e.clientX, y: e.clientY })} >{event.title}</div>
           )}
         </div>
       );

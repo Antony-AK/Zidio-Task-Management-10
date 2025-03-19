@@ -27,7 +27,7 @@ const TaskChart = ({ projectId }) => {
 
     return (
         <div className="p-6 bg-white shadow-lg rounded-lg" data-aos="flip-up" data-aos-duration="800">
-            <h2 className="text-xl text-center font-semibold">Weekly Task Completion</h2>
+            <h2 className="text-lg md:text-xl text-center font-semibold">Weekly Task Completion</h2>
             <h2 className="text-xs text-center mt-1  mb-2">(In last 7 days)</h2>
             <div style={{ height: 200, width: "100%" }}>
                 <ResponsiveHeatMap

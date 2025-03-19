@@ -46,7 +46,7 @@ const DiscussionForum = ({ task, onClose }) => {
         <button className="text-2xl" onClick={onClose}>&times;</button>
       </div>
 
-      <div className="messages h-[420px] md:h-[1000px] lg:h-[500px] overflow-y-scroll p-3 bg-gray-100 rounded-lg mt-4">
+      <div className="messages h-[620px] md:h-[1000px] lg:h-[520px] overflow-y-scroll me-1 p-3 bg-gray-100 rounded-lg mt-4">
         {messages.length === 0 ? (
           <p className="text-gray-500">No messages yet.</p>
         ) : (

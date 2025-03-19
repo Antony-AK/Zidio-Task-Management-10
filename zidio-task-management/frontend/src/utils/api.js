@@ -16,6 +16,17 @@ export const fetchProjects = async () => {
     }
 };
 
+export const addNewProject = async (projectData) => {
+    try {
+      const response = await axios.post(`${BASE_URL}/add-project`, projectData);
+      return response.data;
+    } catch (error) {
+      console.error("Error adding new project:", error);
+      throw error;
+    }
+  };
+  
+
 export const addTaskToProject = async (projectId, taskData) => {
     try {
         const response = await axios.post(`${BASE_URL}/${projectId}/tasks`, taskData);
@@ -61,7 +72,7 @@ export const fetchSummary = async () => {
 //barchart
 export const fetchTaskSummary = async (projectId) => {
     try {
-        const response = await axios.get(`http://localhost:5001/api/projects/${projectId}/tasks-summary`);
+        const response = await axios.get(`${BASE_URL}/${projectId}/tasks-summary`);
         return response.data;
     } catch (error) {
         console.error("Error fetching task summary:", error);
@@ -72,7 +83,7 @@ export const fetchTaskSummary = async (projectId) => {
 //linechart
 export const fetchCompletedTasks = async (projectId) => {
     try {
-        const response = await fetch(`http://localhost:5001/api/projects/${projectId}/completed-tasks`);
+        const response = await fetch(`${BASE_URL}/${projectId}/completed-tasks`);
         if (!response.ok) throw new Error("Failed to fetch completed tasks");
         return await response.json();
     } catch (error) {
@@ -195,7 +206,7 @@ export const deleteMember = async (id) => {
 
 export const fetchNotifications = async () => {
     try {
-      const res = await fetch("http://localhost:5001/api/notifications");
+      const res = await fetch("https://zidio-task-management-10.onrender.com/api/notifications");
       const data = await res.json();
       console.log("API Response:", data);
       return Array.isArray(data) ? data : []; 
@@ -206,3 +217,5 @@ export const fetchNotifications = async () => {
     }
   };
   
+
+

@@ -91,7 +91,7 @@ const Navbar = ({ toggleSidebar, user }) => {
 
             {/* Notification Dropdown */}
             {open && (
-              <div className="absolute right-0 mt-2 w-64 bg-white shadow-lg rounded-lg p-4 z-10">
+              <div className="absolute right-0 mt-2 w-64 bg-white shadow-lg rounded-lg p-4 z-50">
                 <h4 className="text-gray-800 font-semibold mb-2">Notifications</h4>
                 {notifications.length > 0 ? (
                   notifications.map((notification, index) => (
