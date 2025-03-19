@@ -24,6 +24,7 @@ const ProjectSchema = new mongoose.Schema({
     name: { type: String, required: true },
     deadline: { type: Date, required: true },
     status: { type: String, enum: ["Pending", "In Progress", "Done"], default: "Pending" }, // Fixed status
+    manager: { type: String, required: true }, 
     members: [MembersSchema], 
     tasks: [TaskSchema], 
 }, { timestamps: true });

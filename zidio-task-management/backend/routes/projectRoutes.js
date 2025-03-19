@@ -247,7 +247,33 @@ router.get("/:projectId/completed-tasks", async (req, res) => {
     }
 });
 
+// Add a new project
+router.post("/add-project", async (req, res) => {
+    try {
+        const { name, description, manager, deadline } = req.body;
 
+        // Validate required fields
+        if (!name || !description || !manager || !deadline) {
+            return res.status(400).json({ message: "All fields are required" });
+        }
+
+        const newProject = new Project({
+            name,
+            description,
+            manager,   // ✅ Assign project manager
+            deadline,
+            status: "Pending",
+            tasks: [],
+            members: [],
+        });
+
+        await newProject.save();
+        res.status(201).json({ message: "Project added successfully", project: newProject });
+    } catch (error) {
+        console.error("Error adding project:", error);
+        res.status(500).json({ message: "Server Error", error: error.message });
+    }
+});
 
 
 module.exports = router; 
