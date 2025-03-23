@@ -92,7 +92,7 @@ const Members = () => {
 
         <div className='w-full h-[370px] overflow-y-scroll scrollbar-hide min-w-[1200px] lg:min-w-[800px] '>
           {members.map((info) => (
-            <div key={info._id} className="mem-info grid grid-cols-7 bg-white rounded-lg border p-2 hover:border-orange d-flex justify-center items-center gap-3 my-3"  data-aos="fade-up" data-aos-duration="800">
+            <div key={info._id} className="mem-info grid grid-cols-7 bg-white rounded-lg border p-2 hover:border-orange d-flex justify-center items-center gap-3 my-3" >
               <div className="profilepics">
                 <img src={info.profile} className='w-10 h-10 mx-auto rounded-full' alt={info.name} />
               </div>

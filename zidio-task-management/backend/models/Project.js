@@ -25,8 +25,8 @@ const ProjectSchema = new mongoose.Schema({
     deadline: { type: Date, required: true },
     status: { type: String, enum: ["Pending", "In Progress", "Done"], default: "Pending" }, // Fixed status
     manager: { type: String, required: true }, 
-    members: [MembersSchema], 
-    tasks: [TaskSchema], 
+    members: [MembersSchema], default: [], 
+    tasks: [TaskSchema], default: [], 
 }, { timestamps: true });
 
 module.exports = mongoose.model("Project", ProjectSchema);

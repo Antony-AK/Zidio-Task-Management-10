@@ -81,19 +81,19 @@ server.listen(PORT, () => {
 });
 
 // Deadline checking function
-const checkDeadlines = async () => {
-    try {
-        const now = new Date();
-        const dueEvents = await Event.find({ deadline: { $lte: now } });
-        dueEvents.forEach((event) => {
-            io.emit("receiveNotification", {
-                type: "deadline_event",
-                message: `⏳ Deadline Reached: ${event.title}`,
-            });
-        });
-    } catch (error) {
-        console.error("❌ Error checking deadlines:", error);
-    }
-};
+// const checkDeadlines = async () => {
+//     try {
+//         const now = new Date();
+//         const dueEvents = await Event.find({ deadline: { $lte: now } });
+//         dueEvents.forEach((event) => {
+//             io.emit("receiveNotification", {
+//                 type: "deadline_event",
+//                 message: `⏳ Deadline Reached: ${event.title}`,
+//             });
+//         });
+//     } catch (error) {
+//         console.error("❌ Error checking deadlines:", error);
+//     }
+// };
 
-setInterval(checkDeadlines, 87000);
+// setInterval(checkDeadlines, 87000);
