@@ -3,7 +3,7 @@ import { images } from "../../assets/data";
 import { io } from "socket.io-client";
 import { fetchNotifications } from "../../utils/api";
 
-const socket = io("http://localhost:5001", { transports: ["websocket", "polling"] });
+const socket = io("https://zidio-task-management-10.onrender.com", { transports: ["websocket", "polling"] });
 
 const Navbar = ({ toggleSidebar, user }) => {
   const [notifications, setNotifications] = useState([]);
