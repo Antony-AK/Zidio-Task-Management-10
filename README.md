@@ -2,6 +2,7 @@
 # <img src="https://github.com/user-attachments/assets/62df5d7e-f761-4138-964a-78625043c7d8" alt="WorkFlowIQ logo" width="50"/>  Zidio Task Management App - AI-Driven Smart Task Scheduling System
 
 Welcome to **Zidio Task Management App**, your all-in-one platform for smart task scheduling, seamless team collaboration, and efficient project management. Designed with a clean and intuitive interface, WorkFlowIQ helps teams boost productivity with AI-driven scheduling and automated workflows.
+Go Live: https://zidio-task-management-10-pvv9.vercel.app/
 
 ---
 
@@ -21,13 +22,16 @@ Welcome to **Zidio Task Management App**, your all-in-one platform for smart tas
 
 ## 🔑 Features
 
-✅ User and Admin Authentication  
-✅ AI-Powered Smart Task Scheduling  
+✅ User and Manager and Admin Authentication  
+✅ Priority based Task Scheduling  
+✅ Real-Time Messaging 
+✅ Weekly process analysis with LineChart 
+✅ Task-Status with BarChart 
 ✅ Real-time Task Assignments  
-✅ Calendar View for Task Deadlines  
+✅ Calendar View for Task Deadlines and Schedule Events
 ✅ Team Members Management  
 ✅ Notifications for Important Events  
-✅ Responsive and Minimalistic UI  
+✅ Responsive and Minimalistic UI in All Device Screens
 ✅ RESTful API Integration  
 ✅ Secure Backend with JWT Authentication  
 
@@ -85,18 +89,25 @@ Zidio-Task-Management-10/
 ---
 
 ## 🔄 API Endpoints (Sample)
-| Method | Endpoint          | Description               |
-|------- |-------------------|---------------------------|
-| POST   | /api/login        | User/Admin/ Login          |
-| GET    | /api/tasks        | Fetch All Tasks           |
-| POST   | /api/tasks        | Create New Task           |
-| PUT    | /api/tasks/:id    | Update Task               |
-| DELETE | /api/tasks/:id    | Delete Task               |
+| Method | Endpoint          | Description                 |
+|------- |-------------------|-----------------------------|
+| POST   | /api/login        | User/Manager/Admin/ Login   |
+| GET    | /api/projects     | Fetch All Projects          |
+| POST   | /api/tasks        | Create New Task             |
+| PUT    | /api/tasks/:id    | Update Task                 |
+| POST   | /api/members/     | Add Member                  |
+| PUT    | /api/members/:id  | Update Member               |
+| Delete | /api/members/:id  | Delete Member               |
+| GET    | /api/messages     | Show Real-Time Chat         |
+| GET    | /api/notification | Show Real-Time Notification |
+| GET    | /api/summary      | Fetch Summary               |
+
+
 
 ---
 
 ## 💪 Contributions
-👥 This project is developed by **Zidio Development Team**.
+👥 This project is developed by **Zidio Development Team-10**.
 
 Open for contributions. Feel free to fork the repo and raise a PR.
 
@@ -107,8 +118,8 @@ This project is licensed under the **MIT License**.
 
 ---
 
-## 🌐 Live Demo
-👉 **Coming Soon...**
+## 🌐 Live Project
+👉 **[Go Live...](https://zidio-task-management-10-pvv9.vercel.app/)**
 
 ---
 
